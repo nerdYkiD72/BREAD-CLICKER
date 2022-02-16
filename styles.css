@@ -7,6 +7,7 @@
 .center {
     text-align: center;
     margin: auto;
+    margin-bottom: 100px;
     width: 600px;
     padding: 10px;
     background-color: #ffffff11;
@@ -14,10 +15,11 @@
     color: #CBD5E1;
 }
 
-#Title {
+.title {
     color: #CBD5E1;
     text-align: center;
 }
+
 
 #BREAD {
     padding: 1rem;
@@ -47,4 +49,21 @@
 #counter2 {
     color: #FBBF24;
     font-weight: bold;
+    font-size: 100px;
+}
+
+#chart {
+    padding: 7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: large;
+}
+
+#mytable {
+    background-color: white;
+}
+
+#first-prd {
+    background-color: #FBBF24;
+    color: #FBBF24;
 }
