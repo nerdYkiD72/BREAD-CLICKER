@@ -1,5 +1,4 @@
 # BREAD-CLICKER
-Go click bread. 
+Go click bread boissss
 
-
-Get that bread.
+Idk I was bored. Started this on a chromebook. Guess I'm making a shity cookie clicker? I mean totally origial game yeah...
