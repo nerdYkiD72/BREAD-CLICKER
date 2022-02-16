@@ -15,3 +15,10 @@ function makeitnice() {
     document.getElementById('counter2').innerHTML = 69;
 };
 
+
+// Disable image dragging
+const img = document.querySelector('img')
+img.ondragstart = () => {
+  return false;
+};
+

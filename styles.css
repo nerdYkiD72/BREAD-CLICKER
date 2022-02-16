@@ -1,17 +1,50 @@
 .body-main {
     padding: 1rem;
+    background-color: #121212;
+    
 }
 
 .center {
     text-align: center;
     margin: auto;
-    width: 60%;
-    border: 3px solid #73AD21;
+    width: 600px;
     padding: 10px;
+    background-color: #ffffff11;
+    border-radius: 2rem;
+    color: #CBD5E1;
+}
+
+#Title {
+    color: #CBD5E1;
+    text-align: center;
 }
 
 #BREAD {
-    border: 3px solid yellow;
-    
+    padding: 1rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    transition: transform 150ms;
 }
 
+.breadBox:hover{
+    transform: scale(1.1);
+    transition: all ease 150ms;
+  }
+
+.testURMOMLMAO {
+    height: 200;
+    width: 500;
+}
+
+.transform {
+  -webkit-transition: all 2s ease;  
+  -moz-transition: all 2s ease;  
+  -o-transition: all 2s ease;  
+  -ms-transition: all 2s ease;  
+  transition: all 2s ease;
+}
+
+#counter2 {
+    color: #FBBF24;
+    font-weight: bold;
+}
