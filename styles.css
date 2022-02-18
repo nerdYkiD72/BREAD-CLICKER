@@ -67,28 +67,3 @@
     background-color: #FBBF24;
     color: #FBBF24;
 }
-
-
-@font-face {
-
-    font-family: 'urmom';
-    
-    src: local('assets/fonts/Seven/Segment.ttf') format('ttf'),
-    
-    local('assets/fonts/Seven/Segment.ttf') format('ttf');
-    
-    font-weight: normal;
-    
-    font-style: normal;
-    
-    }
-
-
-#clock {
-    font-family: 'Segment7Standard';
-}
-
-.my-primary {
-    --bs-bg-opacity:1;
-    background-color:rgba(147,51,234,255)!important;
-}
