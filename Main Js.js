@@ -22,6 +22,13 @@ img.ondragstart = () => {
   return false;
 };
 
+// const scheduleData = require('./assets/schedules/schedules.json');
+$.getJSON("./assets/schedules/schedules.json", function(json) {
+  document.getElementById('timeLeft').innerHTML = json;
+  console.log(json); // this will show the info it in firebug console
+});
+// const scheduleData = '';
+
 
 
 

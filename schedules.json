@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Mon",
+        "classes": {
+            "firstPeriod": {
+                "start": "8:00 AM",
+                "end": "9:07 AM"
+            },
+            "secondPeriod": {
+                "start": "9:12 AM",
+                "end": "10:24 AM"
+            },
+            "thirdPeriod": {
+                "start": "10:29 AM",
+                "end": "11:36 AM"
+            }
+        }
+    },
+    {
+        "name": "Wed",
+        "classes": [
+            {
+                "firstPeriod": {
+                    "start": "9:00 AM",
+                    "end": "9:49 AM"
+                }
+            },
+            {
+                "secondPeriod": {
+                    "start": "8:00 AM",
+                    "end": "9:07 AM"
+                }
+            },
+            {
+                "thirdPeriod": {
+                    "start": "10:48 AM",
+                    "end": "11:37 AM"
+                }
+            }
+        ]
+    }
+]
