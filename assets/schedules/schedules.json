@@ -1,0 +1,78 @@
+[
+    {
+        "name": "Mon",
+        "classes": [
+            {
+                "name": "1",
+                "start": "8:00 AM",
+                "end": "9:07 AM"
+            },
+            {
+                "name": "2",
+                "start": "9:12 AM",
+                "end": "10:24 AM"
+                
+            },
+            {
+                "name": "3",
+                "start": "10:29 AM",
+                "end": "11:36 AM"
+            },
+            {
+                "name": "Lunch",
+                "start": "11:37 AM",
+                "end": "12:06 AM"
+            },
+            {
+                "name": "4",
+                "start": "12:11 AM",
+                "end": "1:18 PM"
+            },
+            {
+                "name": "5",
+                "start": "1:23 PM",
+                "end": "2:30 PM"
+            }
+        ]
+    },
+    {
+        "name": "Wed",
+        "classes": [
+            {
+                "name": "1",
+                "start": "9:00 AM",
+                "end": "9:49 AM"
+            },
+            {
+                "name": "2",
+                "start": "9:54 AM",
+                "end": "10:43 AM"
+            },
+            {
+                "name": "3",
+                "start": "10:48 AM",
+                "end": "11:37 AM"
+            },
+            {
+                "name": "Lunch",
+                "start": "11:38 PM",
+                "end": "12:07 PM"
+            },
+            {
+                "name": "Advisory",
+                "start": "12:12 PM",
+                "end": "12:43 PM"
+            },
+            {
+                "name": "4",
+                "start": "12:47 PM",
+                "end": "1:36 PM"
+            },
+            {
+                "name": "5",
+                "start": "1:41 PM",
+                "end": "2:30 PM"
+            }
+        ]
+    }
+]

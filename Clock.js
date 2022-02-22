@@ -1,44 +1,10 @@
-// const clock = ;
-
-// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
 const today = new Date();
 
-function updateClock() {
-  var hours = today.getHours();
-  if (hours > 12) {
-    hours = hours - 12;
-  }
-
-  var minutes = today.getMinutes();
-  if (minutes < 10) {
-    minutes = '0' + minutes;
-  }
-
-  var seconds = today.getSeconds();
-  if (seconds < 10) {
-    seconds = '0' + seconds;
-  }
-
-
-  var time = hours + ":" + minutes + ":" + seconds;
-  document.getElementById("clock").innerHTML = time;
-  var t = setTimeout(function(){ updateClock(); }, 1000);
-}
-
-
-
-
-
-
-function currentTime() {
+function updateClock() { // Display the current time. Once called function will repeate every second.
   let date = new Date(); 
-  // date.setHours(13);
-  // date.setMinutes(45);
   let hh = date.getHours();
   let mm = date.getMinutes();
   let ss = date.getSeconds();
-  let session = "AM";
 
   if(hh == 0){
       hh = 12;
@@ -47,154 +13,153 @@ function currentTime() {
     hh = hh - 12;
   }
 
-
-    hh = (hh < 10) ? "0" + hh : hh;
-    mm = (mm < 10) ? "0" + mm : mm;
-    ss = (ss < 10) ? "0" + ss : ss;
-    
-    let time = hh + ":" + mm + ":" + ss;
+  hh = (hh < 10) ? "0" + hh : hh;
+  mm = (mm < 10) ? "0" + mm : mm;
+  ss = (ss < 10) ? "0" + ss : ss;
+  
+  let time = hh + ":" + mm + ":" + ss;
 
   document.getElementById("clock").innerText = time; 
+  getCurrentPeriod();
 
-  // -----------------------------
-  // -------- Class times --------
-  //------------------------------
-
-  // First prd
-  var startTime_1 = new Date();
-  startTime_1.setHours(9);
-  startTime_1.setMinutes(0);
-  var endTime_1 = new Date();
-  endTime_1.setHours(9);
-  endTime_1.setMinutes(49);
-
-
-  // Second prd
-  var startTime_2 = new Date();
-  startTime_2.setHours(9);
-  startTime_2.setMinutes(54);
-  var endTime_2 = new Date();
-  endTime_2.setHours(10);
-  endTime_2.setMinutes(43);
-
-
-  // Third prd
-  var startTime_3 = new Date();
-  startTime_3.setHours(10);
-  startTime_3.setMinutes(48);
-  var endTime_3 = new Date();
-  endTime_3.setHours(11);
-  endTime_3.setMinutes(37);
-
-
-  // Lunch prd
-  var startTime_lunch = new Date();
-  startTime_lunch.setHours(11);
-  startTime_lunch.setMinutes(38);
-  var endTime_lunch = new Date();
-  endTime_lunch.setHours(12);
-  endTime_lunch.setMinutes(11);
-
-
-  // Advisory prd
-  var startTime_adv = new Date();
-  startTime_adv.setHours(12);
-  startTime_adv.setMinutes(12);
-  var endTime_adv = new Date();
-  endTime_adv.setHours(12);
-  endTime_adv.setMinutes(42);
-
-
-  // Fourth prd
-  var startTime_4 = new Date();
-  startTime_4.setHours(12);
-  startTime_4.setMinutes(47);
-  var endTime_4 = new Date();
-  endTime_4.setHours(13);
-  endTime_4.setMinutes(36);
-
-
-  // Fith prd
-  var startTime_5 = new Date();
-  startTime_5.setHours(13);
-  startTime_5.setMinutes(41);
-  var endTime_5 = new Date();
-  endTime_5.setHours(14);
-  endTime_5.setMinutes(30);
-
-  document.getElementById("first").classList.remove("my-primary");
-  document.getElementById("first2").classList.remove("my-primary");
-  document.getElementById("second").classList.remove("my-primary");
-  document.getElementById("second2").classList.remove("my-primary");
-  document.getElementById("third").classList.remove("my-primary");
-  document.getElementById("third2").classList.remove("my-primary");
-  document.getElementById("lunch").classList.remove("my-primary");
-  document.getElementById("lunch2").classList.remove("my-primary");
-  document.getElementById("adv").classList.remove("my-primary");
-  document.getElementById("adv2").classList.remove("my-primary");
-  document.getElementById("fourth").classList.remove("my-primary");
-  document.getElementById("fourth2").classList.remove("my-primary");
-  document.getElementById("fith").classList.remove("my-primary");
-  document.getElementById("fith2").classList.remove("my-primary");
-  
-
-
-  if (date < endTime_1 && date > startTime_1) {
-    document.getElementById("first").classList.add("my-primary");
-    document.getElementById("first2").classList.add("my-primary");
-  }
-  // console.log('First Period: ' + firstPrd);
-
-  if (date < endTime_2 && date > startTime_2) {
-    document.getElementById("second").classList.add("my-primary");
-    document.getElementById("second2").classList.add("my-primary");
-  } 
-  // console.log('Second Period: ' + secondPrd);
-
-  if (date < endTime_3 && date > startTime_3) {
-    document.getElementById("third").classList.add("my-primary");
-    document.getElementById("third2").classList.add("my-primary");
-  }
-  // console.log('Third Period: ' + thirdPrd);
-
-  if (date < endTime_lunch && date > startTime_lunch) {
-    document.getElementById("lunch").classList.add("my-primary");
-    document.getElementById("lunch2").classList.add("my-primary");
-  }
-
-  if (date < endTime_adv && date > startTime_adv) {
-    document.getElementById("adv").classList.add("my-primary");
-    document.getElementById("adv2").classList.add("my-primary");
-  }
-  // console.log('Lunch Period: ' + advPrd);
-
-  if (date < endTime_4 && date > startTime_4) {
-    document.getElementById("fourth").classList.add("my-primary");
-    document.getElementById("fourth2").classList.add("my-primary");
-  }
-  // console.log('Fourth Period: ' + fourthhPrd);
-
-  if (date < endTime_5 && date > startTime_5) {
-    document.getElementById("fith").classList.add("my-primary");
-    document.getElementById("fith2").classList.add("my-primary");
-  }
-  // console.log('Fith Period: ' + fithPrd);
-
-
-  
-
-
-  
-
-  
-
-
-
-  let t = setTimeout(function(){ currentTime() }, 1000);
+  let t = setTimeout(function(){ updateClock() }, 1000);
 }
 
-currentTime();
+function getCurrentPeriod() { // Checks what period the user is in based on the time and day.
+// TODO: This gets called every second... Should probably load the data from schedules.json once and then 
+//       just save it to use later. 
+
+  var dateNow = new Date(); 
+  // dateNow.setHours(11);
+  // dateNow.setMinutes(45);
+
+  $.getJSON("./assets/schedules/schedules.json", function(json) { 
+    if (dateNow != 3) {
+      var daysSchedule = json[0].classes; // 0 = normal day, 1 = wednesday 
+  
+      var i = 0;
+      daysSchedule.forEach(element => {
+        i++;
+        var startTime = dateObj(element.start);
+        var endTime = dateObj(element.end);
+        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+
+        if (open) {
+          selectPeriod(element.name);
+          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
+        }
+      });
+    }
+   });
+}
 
 
+/**
+ * Finds the ammount of time left in a given period.
+ * @param endTime The time that the current period ends.
+ * @param dateNow The currect time. (Or other time to measure to)
+ * @returns A string including the time left in the period.
+ */
+function getTimeLeft(endTime, dateNow) {
+  // TODO: I need to find out what to do inbetween periods and after school (hide it?).
+
+  var hrsLeft = endTime.getHours() - dateNow.getHours();
+  var minsLeft = endTime.getMinutes() - dateNow.getMinutes();
+  var timeLeft = new Date();
+  var oneHrLeft = new Date(); oneHrLeft.setHours(1, 0, 0, 0);
+  var oneMinLeft = new Date(); oneMinLeft.setHours(0, 1, 0, 0);
+  timeLeft.setHours(hrsLeft, minsLeft, 0, 0);
+
+  if (timeLeft.getHours() >= 1 && timeLeft.getMinutes() <= 1) {
+    return `There is <mark class="redTest">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minute left in this period`;
+
+  } 
+  else if (timeLeft >= oneHrLeft && timeLeft.getMinutes() > 1) {
+    return `There is <mark class="redTest">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minutes left in this period`;
+  } 
+  else if (timeLeft.getMinutes() > 1) {
+    return `There are <mark class="redTest">${timeLeft.getMinutes()}</mark> minutes left in this period`;
+
+  } 
+  else if (timeLeft.getMinutes() <= 1) {
+    return `There is <mark class="redTest">${timeLeft.getMinutes()}</mark> minute left in this period`;
+  }
+}
 
 
+function selectPeriod(period) {   // Could be 1-5 and 'Lunch', 'Advisory' ...
+  var dateNow = new Date();
+  var timeElement = document.getElementById("prd" + period + "-time");
+  var titleElement = document.getElementById("prd" + period + "-title");
+
+  clearTableSelections("schedule-chart", "chart-selected");
+
+  if (period >= 1 && period <= 5) {
+    timeElement.classList.remove("chart-background");
+    titleElement.classList.remove("chart-background");
+
+    timeElement.classList.add("chart-selected");
+    titleElement.classList.add("chart-selected");
+  } else if (period == "Lunch" || period == "Advisory") {
+    if (period == "Advisory" && dateNow != 3) {
+      console.warn('You tried to select the period "Advisory" but advisory is not a period today.') // Test this
+    } else {
+      timeElement.classList.remove("chart-background");
+      titleElement.classList.remove("chart-background");
+
+      timeElement.classList.add("chart-selected");
+      titleElement.classList.add("chart-selected");
+    }
+  } else {
+    console.warn("Could not select a table row. The value of the given period may not be valid (out of range).")
+  }
+}
+
+
+// Helper functions:
+
+
+/**
+ * Removes all ID's of the table elements to un select any periods
+ * @param tableID The HTML element of a table.
+ * @param idToRemove The specific ID you want to remove from each HTML element.
+ */
+function clearTableSelections(tableID, idToRemove) {
+  var schdeuldTable = document.getElementById(tableID);
+  // for (var i = 0, cell; cell = schdeuldTable.cells[i]; i++) {
+  //   //iterate through cells
+  //   //cells would be accessed using the "cell" variable assigned in the for loop
+  //   console.log(cell)
+  // }
+  tableCells(schdeuldTable).forEach(element => {
+    element.classList.remove(idToRemove);
+    element.classList.add("chart-background");
+  });
+}
+
+
+/**
+ * Returns all the cells of a table as an array.
+ * @param t The HTML element of a table.
+ */
+function tableCells(t){
+  if(t.cells) return t.cells; // use internal routine when supported
+  for(var a=[], r=t.rows, y=0, c, x; t=r[y++];){
+     for(c=t.cells, x=0; t=c[x++]; a.push(t));
+  } 
+  return a;
+}
+
+
+/**
+ * Parses a date(Ex. "9:00 AM") and returns a date.
+ * @param d The string date to parse.
+ */
+function dateObj(d) {
+  var parts = d.split(/:|\s/),
+      date  = new Date();
+  if (parts.pop().toLowerCase() == 'pm') parts[0] = (+parts[0]) + 12;
+  date.setHours(+parts.shift());
+  date.setMinutes(+parts.shift());
+  return date;
+}
