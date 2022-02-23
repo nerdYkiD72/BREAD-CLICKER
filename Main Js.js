@@ -6,7 +6,7 @@ function myFunction() {
     number = number + 1;
     humanClicks = humanClicks + 1;
     // console.log(`The human has click the bread ${humanClicks} times`);
-    if (number >= 20) {
+    if (number == 20) {
       oneCPS();
     }
     document.getElementById('counter').innerHTML = "The counter is at: ";
