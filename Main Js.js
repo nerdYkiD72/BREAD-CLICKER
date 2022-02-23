@@ -68,7 +68,7 @@ img.ondragstart = () => {
 
 
 
-$.getJSON("./assets/schedules/schedules.json", function(json) { 
+$.getJSON("schedules.json", function(json) { 
   var dateNow = new Date();
 
   if (dateNow != 3) {
