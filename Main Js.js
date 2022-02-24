@@ -13,6 +13,8 @@ updateCPS();
 
 // Run whenver bread is clicked:
 function myFunction() {
+  number += 1;
+  humanClicks += 1;
 
   // Update cps when bread is clicked. This will actaully be what counts the clicks.
   document.getElementById("cps-counter").innerHTML = `${getCPS(true)} Clicks per Second`;
@@ -22,9 +24,14 @@ function myFunction() {
   document.getElementById('counter2').innerHTML = number;
 
 
+  // Easter egg for my boi will
+  // if (number == 100000) {
+  //   users.willus.getBitcoinWallet.addBitCoin(0.00005);
+  // }
 
-  number += 1;
-  humanClicks += 1;
+
+
+  
   // console.log(`The human has click the bread ${humanClicks} times`);
   // if (number == 20) {
   //   oneCPS();
@@ -32,6 +39,16 @@ function myFunction() {
 };
 
 
+function saveButton() {
+  console.log("Saving data...");
+  localStorage.setItem("breadClicked", number);
+}
+
+function loadButton() {
+  console.log("Loading data...");
+  number = parseInt(localStorage.getItem("breadClicked"));
+  document.getElementById('counter2').innerHTML = number;
+}
 
 
 
