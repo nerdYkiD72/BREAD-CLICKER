@@ -34,10 +34,10 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
   // dateNow.setMinutes(45);
 
   $.getJSON("./assets/schedules/schedules.json", function(json) { 
-    if (dateNow != 3) {
-      var daysSchedule = json[0].classes; // 0 = normal day, 1 = wednesday 
-  
-      var i = 0;
+    var dropDown = document.getElementById("schedule-select");
+    var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+    if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+      var daysSchedule = json[2].classes;
       daysSchedule.forEach(element => {
         i++;
         var startTime = dateObj(element.start);
@@ -49,6 +49,39 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
           document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
         }
       });
+    } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
+      var daysSchedule = json[3].classes;
+      daysSchedule.forEach(element => {
+        i++;
+        var startTime = dateObj(element.start);
+        var endTime = dateObj(element.end);
+        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+
+        if (open) {
+          selectPeriod(element.name);
+          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
+        }
+      });
+
+    } else {
+
+// TODO: check this for wednesday
+      if (dateNow != 3) {
+        var daysSchedule = json[0].classes; // 0 = normal day, 1 = wednesday 
+    
+        var i = 0;
+        daysSchedule.forEach(element => {
+          i++;
+          var startTime = dateObj(element.start);
+          var endTime = dateObj(element.end);
+          var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+  
+          if (open) {
+            selectPeriod(element.name);
+            document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
+          }
+        });
+      }
     }
    });
 }

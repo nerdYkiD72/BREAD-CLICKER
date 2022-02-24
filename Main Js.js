@@ -50,6 +50,11 @@ function loadButton() {
   document.getElementById('counter2').innerHTML = number;
 }
 
+function scheduleDropDownLoad() {
+  
+  
+}
+
 
 
 
@@ -87,7 +92,57 @@ $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data
   } else if (dateNow.getDay() == 3) {
     fillTable(json[1].classes);
   }
+
+  var scheduleSelect = document.getElementById("schedule-select");
+  var i = 0;
+  json.forEach(element => {
+    if (i > 1) {
+      var option = document.createElement("option");
+      option.innerHTML = element.name;
+      option.addEventListener('click', function handleClick(event) {
+        var dropDown = document.getElementById("schedule-select");
+        var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+        console.log(selectedSchedule);
+        if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+          clearTable();
+          fillTable(json[2].classes);
+        } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
+          clearTable();
+          fillTable(json[3].classes);
+        }
+      });
+      scheduleSelect.options.add(option);
+    }
+
+    i++;
+  });
+
+
  });
+
+
+function testFunction() {
+  
+}
+
+
+function clearTable() {
+  var scheduleTable = document.getElementById("schedule-chart");
+  var toRemove = [];
+  console.log(scheduleTable);
+  for (let i = 1; i < scheduleTable.rows.length; i++) {
+    const element = scheduleTable.rows[i];
+    
+    toRemove.push(element.id);
+    // document.getElementById(element.id).remove();
+    // element.remove();
+  }
+  toRemove.forEach(element => {
+    console.log(element);
+    document.getElementById(element).remove();
+  });
+}
+
 
 /**
  * Goes through all data given by json data and puts it in a table.
@@ -104,6 +159,9 @@ function fillTable(daysSchedule) {
     var newRow = schdeuldTable.insertRow(i);
     var cell_Left = newRow.insertCell(0);
     var cell_Right = newRow.insertCell(1);
+
+
+    newRow.setAttribute("id", "prd" + element.name + "row")
 
     // Give those cells artibutes to find them later and style them properly.
     cell_Left.setAttribute("id", "prd" + element.name + "-title");

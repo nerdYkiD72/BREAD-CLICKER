@@ -74,5 +74,77 @@
                 "end": "2:30 PM"
             }
         ]
+    },
+    {
+        "name": "Weekday 2hr Delay - B Lunch",
+        "classes": [
+            {
+                "name": "1",
+                "start": "10:00 AM",
+                "end": "10:44 AM"
+            },
+            {
+                "name": "2",
+                "start": "10:49 AM",
+                "end": "11:33 AM"
+                
+            },
+            {
+                "name": "Lunch",
+                "start": "11:34 AM",
+                "end": "12:03 AM"
+            },
+            {
+                "name": "3",
+                "start": "12:08 AM",
+                "end": "12:52 AM"
+            },
+            {
+                "name": "4",
+                "start": "12:57 AM",
+                "end": "1:41 PM"
+            },
+            {
+                "name": "5",
+                "start": "1:46 PM",
+                "end": "2:30 PM"
+            }
+        ]
+    },
+    {
+        "name": "Weekday 2hr Delay - A Lunch",
+        "classes": [
+            {
+                "name": "1",
+                "start": "10:00 AM",
+                "end": "10:44 AM"
+            },
+            {
+                "name": "Lunch",
+                "start": "10:44 AM",
+                "end": "11:14 AM"
+            },
+            {
+                "name": "2",
+                "start": "11:19 AM",
+                "end": "12:03 AM"
+                
+            },
+            {
+                "name": "3",
+                "start": "12:08 AM",
+                "end": "12:52 AM"
+            },
+            {
+                "name": "4",
+                "start": "12:57 AM",
+                "end": "1:41 PM"
+            },
+            {
+                "name": "5",
+                "start": "1:46 PM",
+                "end": "2:30 PM"
+            }
+        ]
     }
 ]
