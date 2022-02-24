@@ -104,6 +104,9 @@ $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data
         var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
         console.log(selectedSchedule);
         if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+          // Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+          var test = document.createElement("option");
+          test.innerHTML = "Hiii";
           clearTable();
           fillTable(json[2].classes);
         } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
