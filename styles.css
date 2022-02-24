@@ -149,3 +149,9 @@ hr {
     color: #FBBF24;
     font-weight: bold;
 }
+
+.lunch-classes {
+    background-color: transparent;
+    color: rgba(147,51,234,255);
+    font-weight: bolder;
+}
