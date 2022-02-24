@@ -114,8 +114,8 @@ $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data
           fillTable(json[3].classes);
         } else {
           console.log("This thing is dumb");
-          clearTable();
-          fillTable(json[2].classes);
+//           clearTable();
+//           fillTable(json[2].classes);
         }
       });
       scheduleSelect.options.add(option);
