@@ -16,28 +16,23 @@
 </head>
 
 <body class="body-main" onselectstart="return false">
-
     <h3 class="title" id="Title">Got bread?</h3>
     <div class="center">
-        <div>
-            <img class="breadBox" src="assets/Bread.png" alt="Italian Trulli" onclick="myFunction()" id="BREAD">
-        </div>
-
-        <div>
-            <h3>Look at all those clicks!</h3>     
-            
-        </div>
-        <div>
-            <label id="counter">The counter is at:</label>
-            <h1 id="counter2">0</h1>
-            <!-- <button id="nice_hehe type="button" class="btn btn-secondary"" onclick="makeitnice()">Nice...</button> -->
-        </div>
-        <button type="button" class="btn btn-primary" id="CPS-test-button" onclick="CPSTestButton()">Test CPS</button>
+      <h3 id="cps-counter">0 CPS</h3>
+      <div>
+          <img class="breadBox" src="assets/Bread.png" alt="Italian Trulli" onclick="myFunction()" id="BREAD">
+          <h3>Look at all those clicks!</h3>     
+      </div>
+      <div>
+          <label id="counter">The counter is at: </label>
+          <h1 id="counter2">0</h1>
+      </div>
     </div>
 
-    <hr/>
 
-    <!-- Wendesay Shedule table -->
+    <hr/>
+    <!-- Schedule stuffs lol -->
+
     <!-- TODO: Add counter for how much time is left in a period -->
     <h2 class="title">School Schedule</h2>
     <div class="center">
@@ -69,6 +64,7 @@
 
 </html>
 <!-- <script type="text/javascript" src="./assets/schedules/schedules.json"></script> -->
+<script src="cps.js"></script>
 <script src="Clock.js"></script>
 <script src="Main Js.js"></script>
 

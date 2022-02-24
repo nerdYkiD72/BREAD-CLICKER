@@ -103,6 +103,16 @@
     padding-top: 20px;
 }
 
+.btn-on {
+    --bs-bg-opacity: 1;
+    background-color: #84CC16!important;
+}
+.btn-off {
+    --bs-bg-opacity: 1;
+    background-color: #ffffff3b!important;
+}
+
+
 .my-primary {
     --bs-bg-opacity: 1;
     background-color: rgba(147,51,234,255)!important;
