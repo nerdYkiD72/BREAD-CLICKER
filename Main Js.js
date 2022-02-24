@@ -102,7 +102,7 @@ $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data
       option.addEventListener('click', function handleClick(event) {
         var dropDown = document.getElementById("schedule-select");
         var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
-//         console.log(selectedSchedule);
+        console.log(selectedSchedule);
         if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
           clearTable();
           fillTable(json[2].classes);
@@ -129,7 +129,7 @@ function testFunction() {
 function clearTable() {
   var scheduleTable = document.getElementById("schedule-chart");
   var toRemove = [];
-//   console.log(scheduleTable);
+  console.log(scheduleTable);
   for (let i = 1; i < scheduleTable.rows.length; i++) {
     const element = scheduleTable.rows[i];
     
@@ -138,7 +138,7 @@ function clearTable() {
     // element.remove();
   }
   toRemove.forEach(element => {
-//     console.log(element);
+    console.log(element);
     document.getElementById(element).remove();
   });
 }
