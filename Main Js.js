@@ -112,6 +112,10 @@ $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data
         } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
           clearTable();
           fillTable(json[3].classes);
+        } else {
+          console.log("This thing is dumb");
+          clearTable();
+          fillTable(json[2].classes);
         }
       });
       scheduleSelect.options.add(option);
