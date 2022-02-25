@@ -79,57 +79,60 @@ img.ondragstart = () => {
   return false;
 };
 
+window.onload = loadSchedule();
 
-
-$.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data from schedules.json
-// TODO: add the ability to add custome schedules (Things like snow day and 60 min ADV.)
-
-  var dateNow = new Date();
-
-// 3 = Wednesday, 1-5 = Weekdays, 6 & 0 = Saturday & Sunday
-  if (dateNow.getDay() != 3) {
-    fillTable(json[0].classes); 
-  } else if (dateNow.getDay() == 3) {
-    fillTable(json[1].classes);
-  }
-
-  var scheduleSelect = document.getElementById("schedule-select");
-  var i = 0;
-  json.forEach(element => {
-    if (i > 1) {
-      var option = document.createElement("option");
-      option.innerHTML = element.name;
-      option.addEventListener('click', function handleClick(event) {
-        var dropDown = document.getElementById("schedule-select");
-        var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
-        console.log(selectedSchedule);
-        if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
-          clearTable();
-          fillTable(json[2].classes);
-        } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
-          clearTable();
-          fillTable(json[3].classes);
-        }
-      });
-      scheduleSelect.options.add(option);
+function loadSchedule() {
+  $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data from schedules.json
+    // TODO: add the ability to add custome schedules (Things like snow day and 60 min ADV.)
+    
+    var dateNow = new Date();
+    
+    // 3 = Wednesday, 1-5 = Weekdays, 6 & 0 = Saturday & Sunday
+    if (dateNow.getDay() != 3) {
+      fillTable(json[0].classes); 
+    } else if (dateNow.getDay() == 3) {
+      fillTable(json[1].classes);
     }
-
-    i++;
+    
+    var scheduleSelect = document.getElementById("schedule-select");
+    var i = 0;
+    json.forEach(element => {
+      if (i > 1) {
+        var option = document.createElement("option");
+        option.innerHTML = element.name;
+        scheduleSelect.options.add(option);
+      }
+      i++;
+    });
   });
+}
 
 
- });
 
-
-function testFunction() {
-  
+function scheduleSelectChange() {
+  $.getJSON("./assets/schedules/schedules.json", function(json) {
+    console.log("UR MOM BOB");
+    var dropDown = document.getElementById("schedule-select");
+    var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+    console.log(selectedSchedule);
+    if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+      console.log("Pleaseeee")
+      clearTable();
+      fillTable(json[2].classes);
+    } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
+      console.log("AHHHHHHHHHHH")
+      clearTable();
+      fillTable(json[3].classes);
+    }
+  });
 }
 
 
 function clearTable() {
+  console.log("Hiiii");
   var scheduleTable = document.getElementById("schedule-chart");
   var toRemove = [];
-  console.log(scheduleTable);
+  console.log(scheduleTable.rows.length);
   for (let i = 1; i < scheduleTable.rows.length; i++) {
     const element = scheduleTable.rows[i];
     
@@ -137,11 +140,14 @@ function clearTable() {
     // document.getElementById(element.id).remove();
     // element.remove();
   }
+  console.log("cock");
   toRemove.forEach(element => {
     console.log(element);
     document.getElementById(element).remove();
   });
 }
+
+
 
 
 /**
