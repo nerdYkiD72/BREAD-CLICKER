@@ -1,6 +1,6 @@
 const niceButton = document.getElementById("nice_hehe");
 const startDate = new Date();
-let number = 999998;
+let number = 0;
 var humanClicks = 0;
 var cps = 0;
 
