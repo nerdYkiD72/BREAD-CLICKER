@@ -9,10 +9,25 @@
     margin: auto;
     width: 600px;
     padding: 10px;
-    background-color: #ffffff11;
+    background-image: linear-gradient(to bottom right, #C026D3, #2563EB);
+    /* background-color: #ffffff11; */
     border-radius: 2rem;
     color: #CBD5E1;
 }
+
+.sub-container {
+    text-align: center;
+    margin: auto;  /* Centers div */
+    border-radius: 1.5rem;
+    background-color: #ffffff3a;
+    /* width:fit-content;
+    height:fit-content;  Makes the dive fit to the text inside */
+    padding: 1rem;
+
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
 
 .title {
     color: #CBD5E1;
