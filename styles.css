@@ -1,7 +1,20 @@
+/* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"; */
+
 .body-main {
-    padding: 1rem;
-    background-color: #121212;
-    
+    /* padding: 1rem; */
+    /* background-color: #121212; */
+    /* background-image: linear-gradient(to bottom right, #C026D3, #2563EB); */
+    background-image: url("assets/background.png");
+    /* background-color: #ffffff; */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-size: cover;
+}
+.dumby {
+    padding-top: 45%;
+    font-size: x-small;
 }
 
 .center {
@@ -9,29 +22,59 @@
     margin: auto;
     width: 600px;
     padding: 10px;
-    background-image: linear-gradient(to bottom right, #C026D3, #2563EB);
+    /* background-image: linear-gradient(to bottom right, #C026D3, #2563EB); */
     /* background-color: #ffffff11; */
-    border-radius: 2rem;
-    color: #CBD5E1;
+    border-radius: 0.75rem;
+    color: #464646;
+    /* background-color: #121212; */
+    background-color: rgba(250, 250, 250, 0.61);
+    /* box-shadow: 10px 10px 5px  rgba(255, 255, 255, 0.103); */
+    backdrop-filter: blur(5px);
 }
 
 .sub-container {
     text-align: center;
     margin: auto;  /* Centers div */
-    border-radius: 1.5rem;
-    background-color: #ffffff3a;
-    /* width:fit-content;
+    border-radius: 0.75rem;
+    background-color: #ffffff2d;
+    /* width:fit-content;  #ffffff3a
     height:fit-content;  Makes the dive fit to the text inside */
     padding: 1rem;
 
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 2rem;
+    margin-top: 0;
+    
+    backdrop-filter: blur(5px);
+}
+
+.sub-container-2 {
+    text-align: center;
+    margin: auto;  /* Centers div */
+    border-radius: 1.5rem;
+    background-color: #3F3F46;
+    /* width:fit-content;  #ffffff3a
+    height:fit-content;  Makes the dive fit to the text inside */
+    padding: 1rem;
+
+    margin: 2rem;
+    margin-top: 0;
+    
+    backdrop-filter: blur(5px);
+}
+.sub-title {
+    color: #000000be;
+    font-weight: bold;
+    letter-spacing: 1px;
+
 }
 
 
+
 .title {
-    color: #CBD5E1;
+    color: #F8FAFC;
     text-align: center;
+    font-size: 40px;
+    margin-bottom: 1rem;
     /* padding-bottom: rem; */
 }
 
@@ -74,8 +117,6 @@
     font-size: large;
 }
 
-
-
 #first-prd {
     background-color: #FBBF24;
     color: #FBBF24;
@@ -95,8 +136,6 @@
     font-style: normal;
     
     }
-
-
 
 #clock-container {
     padding-bottom: 1px;
@@ -127,22 +166,31 @@
     background-color: #ffffff3b!important;
 }
 
-
 .my-primary {
     --bs-bg-opacity: 1;
-    background-color: rgba(147,51,234,255)!important;
+    background-color: #f792f4!important;
 }
 
 .chart-selected {
     --bs-bg-opacity: 1;
-    background-color: rgba(147,51,234,255)!important;
+    background-color: #7E22CE!important;
     font-weight: bold;
     color: #ffffff;
+    /* background-image: linear-gradient(to bottom right, #84CC16, #14B8A6); */
+    /* background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent; */
 }
 
 .chart-background {
-    --bs-bg-opacity:1;
+    --bs-bg-opacity:1; 
     background-color: #ffffff21 !important;
+}
+.chart-background-title {
+    --bs-bg-opacity:1;
+    background-color: #3F3F46 !important;
 }
 
 #schedule-chart {
@@ -153,8 +201,8 @@
 hr {
     margin-top: 4rem;
     margin-bottom: 4rem;
-    margin-right: 30rem;
-    margin-left: 30rem;
+    margin-right: 20%;
+    margin-left: 20%;
     border: 0;
     border-top: 3px solid rgb(255, 255, 255);
 }
@@ -167,6 +215,15 @@ hr {
 
 .lunch-classes {
     background-color: transparent;
-    color: rgba(147,51,234,255);
+    color: #F3F4F6;
     font-weight: bolder;
+}
+
+#full-center-split {
+    border: 0;
+    margin: 0;
+    padding: 0px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-top: 3px solid #000000;
 }

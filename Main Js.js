@@ -105,11 +105,12 @@ function loadSchedule() {
       i++;
     });
   });
+  updateClock();
 }
 
 
 
-function scheduleSelectChange() {
+function scheduleSelectChange() { // Add more scheduels
   $.getJSON("./assets/schedules/schedules.json", function(json) {
     console.log("UR MOM BOB");
     var dropDown = document.getElementById("schedule-select");
@@ -167,7 +168,7 @@ function fillTable(daysSchedule) {
     var cell_Right = newRow.insertCell(1);
 
 
-    newRow.setAttribute("id", "prd" + element.name + "row")
+    newRow.setAttribute("id", "prd" + element.name + "row");
 
     // Give those cells artibutes to find them later and style them properly.
     cell_Left.setAttribute("id", "prd" + element.name + "-title");
@@ -181,6 +182,6 @@ function fillTable(daysSchedule) {
   });
 
   // Start updateing the clock once the table has loaded.
-  updateClock();
+  
 
 }
