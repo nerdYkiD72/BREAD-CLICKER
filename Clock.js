@@ -30,8 +30,8 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
 //       just save it to use later. 
 
   var dateNow = new Date(); 
-  dateNow.setHours(11);
-  dateNow.setMinutes(45);
+//   dateNow.setHours(11);
+//   dateNow.setMinutes(45);
 
   $.getJSON("./assets/schedules/schedules.json", function(json) { 
     var dropDown = document.getElementById("schedule-select");
