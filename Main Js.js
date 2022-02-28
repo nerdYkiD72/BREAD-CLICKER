@@ -73,6 +73,18 @@ function makeitnice() {
 };
 
 
+function purchaseItem(item) {
+  if (item == "getGud") {
+      number = number - 10;
+      localStorage.setItem("breadClicked", number);
+      document.getElementById('counter2').innerHTML = number;
+  }
+}
+
+
+
+
+
 // Disable image dragging on the page
 const img = document.querySelector('img')
 img.ondragstart = () => {
