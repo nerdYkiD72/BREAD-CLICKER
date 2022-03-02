@@ -33,6 +33,7 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
   // dateNow.setHours(11);
   // dateNow.setMinutes(40);
 
+
   $.getJSON("./assets/schedules/schedules.json", function(json) { 
     var dropDown = document.getElementById("schedule-select");
     var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
