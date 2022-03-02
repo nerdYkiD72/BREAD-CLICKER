@@ -30,8 +30,8 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
 //       just save it to use later. 
 
   var dateNow = new Date(); 
-  dateNow.setHours(11);
-  dateNow.setMinutes(45);
+  // dateNow.setHours(11);
+  // dateNow.setMinutes(40);
 
   $.getJSON("./assets/schedules/schedules.json", function(json) { 
     var dropDown = document.getElementById("schedule-select");
@@ -63,6 +63,19 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
         }
       });
 
+    } else if (selectedSchedule == "Wed - 1hr long Advisory") {
+      var daysSchedule = json[4].classes;
+      daysSchedule.forEach(element => {
+        i++;
+        var startTime = dateObj(element.start);
+        var endTime = dateObj(element.end);
+        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+
+        if (open) {
+          selectPeriod(element.name);
+          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
+        }
+      });
     } else {
 
 // TODO: check this for wednesday

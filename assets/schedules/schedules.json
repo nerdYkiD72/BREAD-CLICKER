@@ -146,5 +146,45 @@
                 "end": "2:30 PM"
             }
         ]
+    },
+    {
+        "name": "Wed - 1hr long Advisory",
+        "classes": [
+            {
+                "name": "1",
+                "start": "9:00 AM",
+                "end": "9:43 AM"
+            },
+            {
+                "name": "2",
+                "start": "9:48 AM",
+                "end": "10:31 AM"
+            },
+            {
+                "name": "3",
+                "start": "10:36 AM",
+                "end": "11:19 AM"
+            },
+            {
+                "name": "Lunch",
+                "start": "11:19 AM",
+                "end": "11:49 AM"
+            },
+            {
+                "name": "Advisory",
+                "start": "11:54 AM",
+                "end": "12:54 AM"
+            },
+            {
+                "name": "4",
+                "start": "12:59 AM",
+                "end": "1:42 PM"
+            },
+            {
+                "name": "5",
+                "start": "1:47 PM",
+                "end": "2:30 PM"
+            }
+        ]
     }
 ]

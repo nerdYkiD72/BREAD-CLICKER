@@ -124,7 +124,6 @@ function loadSchedule() {
 
 function scheduleSelectChange() { // Add more scheduels
   $.getJSON("./assets/schedules/schedules.json", function(json) {
-    console.log("UR MOM BOB");
     var dropDown = document.getElementById("schedule-select");
     var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
     console.log(selectedSchedule);
@@ -136,6 +135,10 @@ function scheduleSelectChange() { // Add more scheduels
       console.log("AHHHHHHHHHHH")
       clearTable();
       fillTable(json[3].classes);
+    } else if (selectedSchedule == "Wed - 1hr long Advisory") {
+      console.log("AHHHHHHHHHHH")
+      clearTable();
+      fillTable(json[4].classes);
     }
   });
 }
