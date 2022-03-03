@@ -216,7 +216,7 @@ hr {
   border-top: 3px solid rgb(255, 255, 255);
 }
 
-.redTest {
+.yellow-marker {
   background-color: transparent;
   color: #fbbf24;
   font-weight: bold;
@@ -236,4 +236,16 @@ hr {
   margin-left: 20%;
   margin-right: 20%;
   border-top: 3px solid #000000;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.marker {
+  color: #fbbf24;
+}
+
+.buy-button {
+  font-weight: bold;
 }

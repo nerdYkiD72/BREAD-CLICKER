@@ -33,6 +33,18 @@
                 "start": "1:23 PM",
                 "end": "2:30 PM"
             }
+        ],
+        "altClasses": [
+            {
+                "name": "Lunch",
+                "star": "10:24 AM",
+                "end": "10:54 AM"
+            }, 
+            {
+                "name": "3",
+                "start": "10:59 AM",
+                "end": "12:06 AM"
+            }
         ]
     },
     {
@@ -55,7 +67,7 @@
             },
             {
                 "name": "Lunch",
-                "start": "11:38 PM",
+                "start": "11:37 AM",
                 "end": "12:07 PM"
             },
             {
@@ -108,6 +120,19 @@
                 "name": "5",
                 "start": "1:46 PM",
                 "end": "2:30 PM"
+            }
+        ],
+        "altClasses": [
+            {
+                "name": "Lunch",
+                "start": "10:44 AM",
+                "end": "11:14 AM"
+            },
+            {
+                "name": "2",
+                "start": "11:19 AM",
+                "end": "12:03 AM"
+                
             }
         ]
     },
@@ -177,7 +202,7 @@
             },
             {
                 "name": "4",
-                "start": "12:59 pm",
+                "start": "12:59 PM",
                 "end": "1:42 PM"
             },
             {

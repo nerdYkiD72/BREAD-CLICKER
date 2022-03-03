@@ -1,8 +1,11 @@
 const niceButton = document.getElementById("nice_hehe");
 const startDate = new Date();
+const scheduleDataKey = "SCHEDULE_DATA";
+const counterDOM = document.getElementById('counter2');
 let number = 0;
 var humanClicks = 0;
 var cps = 0;
+var addedSclicesPerClick = 0;
 
 
 function updateCPS() {
@@ -13,15 +16,14 @@ updateCPS();
 
 // Run whenver bread is clicked:
 function myFunction() {
-  number += 1;
+  number = number + 1 + addedSclicesPerClick;
   humanClicks += 1;
 
   // Update cps when bread is clicked. This will actaully be what counts the clicks.
   document.getElementById("cps-counter").innerHTML = `${getCPS(true)} Clicks per Second`;
   
-
+  updateCounter();
   // Update the visual counter of total clicks
-  document.getElementById('counter2').innerHTML = number;
 
 
   // Easter egg for my boi will
@@ -48,11 +50,28 @@ function loadButton() {
   console.log("Loading data...");
   number = parseInt(localStorage.getItem("breadClicked"));
   document.getElementById('counter2').innerHTML = number;
+
+
+
+  // var storedData = localStorage["upgradeData"];
+  
+  //   if (storedData) { // We have a cache
+  //     upgradeData = JSON.parse(storedData);
+  
+  //     if (JSON.stringify(scheduleData) == JSON.stringify(json)) {
+  //       console.log("Continuing with cache of schedules.");
+  //     } else {
+  //       console.log("Updating cache of schedules.");
+  //       localStorage[scheduleDataKey] = JSON.stringify(json);
+  //     }
+  //   } else {
+  
+  //     console.log("No cache of schedules, creating one.");
+  //     localStorage[scheduleDataKey] = JSON.stringify(json);
+  //   }
 }
 
 function scheduleDropDownLoad() {
-  
-  
 }
 
 
@@ -75,13 +94,24 @@ function makeitnice() {
 
 function purchaseItem(item) {
   if (item == "getGud") {
-      number = number - 10;
+    number = number - 10;
+    localStorage.setItem("breadClicked", number);
+    document.getElementById('counter2').innerHTML = number;
+
+  } else if (item == "plasticButterKnife") { // Purchase butter knife
+    if (number >= 100) {
+      number = number - 100;
       localStorage.setItem("breadClicked", number);
       document.getElementById('counter2').innerHTML = number;
+
+      addedSclicesPerClick = 0.25
+    }
   }
 }
 
-
+function updateCounter() {
+  counterDOM.innerHTML = Math.trunc(number);
+}
 
 
 
@@ -91,61 +121,91 @@ img.ondragstart = () => {
   return false;
 };
 
-window.onload = loadSchedule();
 
+
+window.onload = loadSchedule();
+/**
+ * Loads in JSON data.
+ * Checks for cache in Local Storage.
+ * If cache is updated, continue, but if not, update cache.
+ * Reference cache with Local Storage.
+ */
 function loadSchedule() {
-  $.getJSON("./assets/schedules/schedules.json", function(json) {  // Read in data from schedules.json
-    // TODO: add the ability to add custome schedules (Things like snow day and 60 min ADV.)
-    
-    var dateNow = new Date();
-    
-    // 3 = Wednesday, 1-5 = Weekdays, 6 & 0 = Saturday & Sunday
-    if (dateNow.getDay() != 3) {
-      fillTable(json[0].classes); 
-    } else if (dateNow.getDay() == 3) {
-      fillTable(json[1].classes);
-    }
-    
-    var scheduleSelect = document.getElementById("schedule-select");
-    var i = 0;
-    json.forEach(element => {
-      if (i > 1) {
-        var option = document.createElement("option");
-        option.innerHTML = element.name;
-        scheduleSelect.options.add(option);
+  $.getJSON("./assets/schedules/schedules.json", function(json) { // Get the latest data
+    var storedData = localStorage["SCHEDULE_DATA"];
+  
+    if (storedData) { // We have a cache
+      scheduleData = JSON.parse(storedData);
+  
+      if (JSON.stringify(scheduleData) == JSON.stringify(json)) {
+        console.log("Continuing with cache of schedules.");
+      } else {
+        console.log("Updating cache of schedules.");
+        localStorage[scheduleDataKey] = JSON.stringify(json);
       }
-      i++;
-    });
+    } else {
+  
+      console.log("No cache of schedules, creating one.");
+      localStorage[scheduleDataKey] = JSON.stringify(json);
+    }
+  });    // TODO: add the ability to add custome schedules (Things like snow day and 60 min ADV.)
+  
+  // Once we know the cache is right, serve its contents to the user.
+  serveData();
+}
+
+/**
+ * Displays the data from cached JSON in the schedule table.
+ * Only logic here for now is determining what schedule to show for either Wed. or other weekdays.
+ */
+// TODO: Make it so you can remember what the last schedule was.
+function serveData() {
+  var dateNow = new Date();
+  var json = JSON.parse(localStorage[scheduleDataKey]);
+  
+  // 3 = Wednesday, 1-5 = Weekdays, 6 & 0 = Saturday & Sunday
+  if (dateNow.getDay() == 3) {
+    fillTable(json[1].classes);
+  } else { fillTable(json[0].classes); }
+  
+  var scheduleSelect = document.getElementById("schedule-select");
+  var i = 0;
+
+  // Create and fill elements for times:
+  json.forEach(element => {
+    if (i > 1) {
+      var option = document.createElement("option");
+      option.innerHTML = element.name;
+      scheduleSelect.options.add(option);
+    }
+    i++;
   });
+
+  // Now that the schedule is loaded start updating the clock.
   updateClock();
 }
 
 
-
 function scheduleSelectChange() { // Add more scheduels
-  $.getJSON("./assets/schedules/schedules.json", function(json) {
-    var dropDown = document.getElementById("schedule-select");
-    var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
-    console.log(selectedSchedule);
-    if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
-      console.log("Pleaseeee")
-      clearTable();
-      fillTable(json[2].classes);
-    } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
-      console.log("AHHHHHHHHHHH")
-      clearTable();
-      fillTable(json[3].classes);
-    } else if (selectedSchedule == "Wed - 1hr long Advisory") {
-      console.log("AHHHHHHHHHHH")
-      clearTable();
-      fillTable(json[4].classes);
-    }
-  });
+  var json = JSON.parse(localStorage[scheduleDataKey]);
+  var dropDown = document.getElementById("schedule-select");
+  var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+
+  console.log(selectedSchedule);
+  if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+    clearTable();
+    fillTable(json[2].classes);
+  } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
+    clearTable();
+    fillTable(json[3].classes);
+  } else if (selectedSchedule == "Wed - 1hr long Advisory") {
+    clearTable();
+    fillTable(json[4].classes);
+  }
 }
 
 
 function clearTable() {
-  console.log("Hiiii");
   var scheduleTable = document.getElementById("schedule-chart");
   var toRemove = [];
   console.log(scheduleTable.rows.length);
@@ -156,9 +216,7 @@ function clearTable() {
     // document.getElementById(element.id).remove();
     // element.remove();
   }
-  console.log("cock");
   toRemove.forEach(element => {
-    console.log(element);
     document.getElementById(element).remove();
   });
 }

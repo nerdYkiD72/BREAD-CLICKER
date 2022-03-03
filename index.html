@@ -32,14 +32,15 @@
             <img class="breadBox" src="assets/bread-2.png" alt="Italian Trulli" onclick="myFunction()" id="BREAD">
           </div>
           <div class="sub-container">
-            <h3 class="sub-title-small">Look at all those clicks!</h3>
-            <label id="counter">The counter is at: </label>
+            <h3 class="sub-title-small">Look at all those slices!</h3>
+            <label id="counter">Number of slices: </label>
             <h1 id="counter2">0</h1>
           </div>
             <button type="button" onclick="loadButton()" class="button is-success" id="save-button">Load Data</button>
             <button type="button" onclick="saveButton()" class="button is-success" id="save-button">Save Data</button>
           </div>
           </div>
+          <!-- Shoppppp -->
           <div class="column">
             <div class="shop">
               <div>
@@ -48,6 +49,7 @@
                   <h2 class="sub-title">Click Shop</h2>
                   <hr id="full-center-split" />
                   <div class="shop-items">
+                    <!-- Lmao Get gud nub -->
                     <div class="card">
                       <div class="card-content">
                         <div class="media">
@@ -60,6 +62,23 @@
                             <p class="sub-title-small"> Lmao Get gud nub</p>
                             <p class="subtitle is-6">Buy me lmao</p>
                             <button class="button is-success" onclick="purchaseItem('getGud')">Purchase</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Butter knife -->
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="media">
+                          <div class="media-left">
+                            <figure class="image is-128x128">
+                              <img src="./assets/plastic-butter-knife.png">
+                            </figure>
+                          </div>
+                          <div class="media-content">
+                            <p class="sub-title-small" id="knife-title">Plastic Butter Knife</p>
+                            <p class="subtitle is-6" id="knife-description">25% more slices of bread.</p>
+                            <button class="button is-success buy-button" onclick="purchaseItem('plasticButterKnife')">100 Sclices</button>
                           </div>
                         </div>
                       </div>
@@ -114,13 +133,23 @@
               onchange="scheduleSelectChange()"></section>>
               <option selected>Not the schedule today? Change it manually here.</option>
             </select>
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="A/B-Lunch" id="A-select">
+                B Lunch
+              </label>
+              <label class="radio">
+                <input type="radio" name="A/B-Lunch" id="B-select">
+                B Lunch
+              </label>
+            </div>
           </div>
           <p>
-            You have <mark class="redTest">A Lunch</mark> if your second period is: <mark class="lunch-classes">Art,
+            You have <mark class="yellow-marker">A Lunch</mark> if your second period is: <mark class="lunch-classes">Art,
               Band, Choir, CTE, Math, or Sciences</mark>
           </p>
           <p>
-            You have <mark class="redTest">B Lunch</mark> if your second period is: <mark class="lunch-classes">ELA,
+            You have <mark class="yellow-marker">B Lunch</mark> if your second period is: <mark class="lunch-classes">ELA,
               Health/PE, ROTC, Speacial Programs, Social Studies, World Languages</mark>
           </p>
           <a href="https://www.ohsd.net/Page/5936" target="_blank">Official School Schedules</a>

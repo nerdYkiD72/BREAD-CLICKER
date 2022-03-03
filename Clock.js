@@ -25,79 +25,55 @@ function updateClock() { // Display the current time. Once called function will 
   let t = setTimeout(function(){ updateClock() }, 1000);
 }
 
-function getCurrentPeriod() { // Checks what period the user is in based on the time and day.
-// TODO: This gets called every second... Should probably load the data from schedules.json once and then 
-//       just save it to use later. 
+function getCurrentPeriod() { // Checks what period the user is in based on the time and day. 
+  var json = JSON.parse(localStorage[scheduleDataKey]);
+  const dropDown = document.getElementById("schedule-select");
+  var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
 
   var dateNow = new Date(); 
-  // dateNow.setHours(11);
-  // dateNow.setMinutes(40);
-
-
-  $.getJSON("./assets/schedules/schedules.json", function(json) { 
-    var dropDown = document.getElementById("schedule-select");
-    var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
-    if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
-      var daysSchedule = json[2].classes;
-      daysSchedule.forEach(element => {
-        i++;
-        var startTime = dateObj(element.start);
-        var endTime = dateObj(element.end);
-        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
-
-        if (open) {
-          selectPeriod(element.name);
-          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
-        }
-      });
-    } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
-      var daysSchedule = json[3].classes;
-      daysSchedule.forEach(element => {
-        i++;
-        var startTime = dateObj(element.start);
-        var endTime = dateObj(element.end);
-        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
-
-        if (open) {
-          selectPeriod(element.name);
-          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
-        }
-      });
-
-    } else if (selectedSchedule == "Wed - 1hr long Advisory") {
-      var daysSchedule = json[4].classes;
-      daysSchedule.forEach(element => {
-        i++;
-        var startTime = dateObj(element.start);
-        var endTime = dateObj(element.end);
-        var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
-
-        if (open) {
-          selectPeriod(element.name);
-          document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
-        }
-      });
-    } else {
-
-// TODO: check this for wednesday
-      if (dateNow != 3) {
-        var daysSchedule = json[0].classes; // 0 = normal day, 1 = wednesday 
-    
-        var i = 0;
-        daysSchedule.forEach(element => {
-          i++;
-          var startTime = dateObj(element.start);
-          var endTime = dateObj(element.end);
-          var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+  dateNow.setHours(12);
+  dateNow.setMinutes(38);
   
-          if (open) {
-            selectPeriod(element.name);
-            document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
-          }
-        });
-      }
+  if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
+    clockCycleThings(json, 2, dateNow);
+
+  } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
+    clockCycleThings(json, 3, dateNow);
+
+  } else if (selectedSchedule == "Wed - 1hr long Advisory") {
+    clockCycleThings(json, 4, dateNow);
+
+  } else {                                  // TODO: check this for wednesday
+    if (dateNow.getDay() != 3) {
+      clockCycleThings(json, 0, dateNow);
+    } else {
+      clockCycleThings(json, 1, dateNow);
+
+      
     }
-   });
+  }
+}
+
+
+function clockCycleThings(json, dayNumber, dateNow) {
+// TODO: Fix this L
+  
+  var daysSchedule = json[dayNumber].classes;
+  var i = 0;
+
+  daysSchedule.forEach(element => {
+    i++;
+    var startTime = dateObj(element.start);
+    var endTime = dateObj(element.end);
+    var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
+
+    
+
+    if (open) {
+      selectPeriod(element.name);
+      document.getElementById("time-left").innerHTML =  getTimeLeft(endTime, dateNow);
+    }
+  });
 }
 
 
@@ -118,18 +94,18 @@ function getTimeLeft(endTime, dateNow) {
   timeLeft.setHours(hrsLeft, minsLeft, 0, 0);
 
   if (timeLeft.getHours() >= 1 && timeLeft.getMinutes() <= 1) {
-    return `There is <mark class="redTest">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minute left in this period`;
+    return `There is <mark class="yellow-marker">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minute left in this period`;
 
   } 
   else if (timeLeft >= oneHrLeft && timeLeft.getMinutes() > 1) {
-    return `There is <mark class="redTest">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minutes left in this period`;
+    return `There is <mark class="yellow-marker">${timeLeft.getHours()}</mark> hour and <mark class="redTest">${timeLeft.getMinutes()}</mark> minutes left in this period`;
   } 
   else if (timeLeft.getMinutes() > 1) {
-    return `There are <mark class="redTest">${timeLeft.getMinutes()}</mark> minutes left in this period`;
+    return `There are <mark class="yellow-marker">${timeLeft.getMinutes()}</mark> minutes left in this period`;
 
   } 
   else if (timeLeft.getMinutes() <= 1) {
-    return `There is <mark class="redTest">${timeLeft.getMinutes()}</mark> minute left in this period`;
+    return `There is <mark class="yellow-marker">${timeLeft.getMinutes()}</mark> minute left in this period`;
   }
 }
 
