@@ -104,7 +104,7 @@ function purchaseItem(item) {
       localStorage.setItem("breadClicked", number);
       document.getElementById('counter2').innerHTML = number;
 
-      addedSclicesPerClick = 0.25
+      addedSclicesPerClick += 0.25
     }
   }
 }
