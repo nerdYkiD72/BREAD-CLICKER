@@ -1,0 +1,32 @@
+[
+    {
+        "userName": "Bob",
+        "userId": "12345",
+        "userMetaData": {
+            "preferedSchedule": "id=2",
+            "random": "data",
+            "will": "go here"
+        },
+        "saveData": {
+            "totalClicks": 99999,
+            "slicesOfBread": 654321,
+            "upgrades": [
+                {
+                    "upgrade": "Knife",
+                    "type": "Plastic Butter knife",
+                    "quantity": 50
+                },
+                {
+                    "upgrade": "Knife",
+                    "type": "Metal Butter knife",
+                    "quantity": 20
+                },
+                {
+                    "upgrade": "LmaoGetGudNub",
+                    "type": "default",
+                    "quantity": 10
+                }
+            ]
+        }
+    }
+]

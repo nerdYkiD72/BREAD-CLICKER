@@ -31,8 +31,8 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
   var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
 
   var dateNow = new Date(); 
-  dateNow.setHours(12);
-  dateNow.setMinutes(38);
+  // dateNow.setHours(12);
+  // dateNow.setMinutes(38);
   
   if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
     clockCycleThings(json, 2, dateNow);

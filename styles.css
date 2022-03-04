@@ -243,6 +243,7 @@ hr {
 }
 
 .marker {
+  background: transparent;
   color: #fbbf24;
 }
 

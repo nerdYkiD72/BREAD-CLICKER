@@ -1,33 +1,48 @@
 const niceButton = document.getElementById("nice_hehe");
 const startDate = new Date();
 const scheduleDataKey = "SCHEDULE_DATA";
+const saveDataKey = "SAVE_DATA";
 const counterDOM = document.getElementById('counter2');
-let number = 0;
-var humanClicks = 0;
+const knifeCountDOM = document.getElementById("knife-count");
+const knifeAddedSlicesDOM = document.getElementById("knife-added-slices");
+let totalClicks = 0;
+var breadSlices = 0;
 var cps = 0;
 var addedSclicesPerClick = 0;
+var saveData;
+var humanClicks = 0;
 
 
-function updateCPS() {
-  document.getElementById("cps-counter").innerHTML = `${getCPS(false)} Clicks per Second`;
-  let a = setTimeout(function(){ updateCPS(); }, 100);
+
+
+
+
+
+
+
+function saveData() {
+  localStorage.setItem(saveDataKey, JSON.stringify(saveData));
 }
-updateCPS();
 
 // Run whenver bread is clicked:
 function myFunction() {
-  number = number + 1 + addedSclicesPerClick;
-  humanClicks += 1;
+  totalClicks = totalClicks + 1; // Keep track of total clicks
+  breadSlices = breadSlices + 1 + addedSclicesPerClick; // Keep track of actual bread sliced
 
   // Update cps when bread is clicked. This will actaully be what counts the clicks.
   document.getElementById("cps-counter").innerHTML = `${getCPS(true)} Clicks per Second`;
   
+  saveData.totalClicks = totalClicks;
+  saveData.breadSlices = breadSlices;
+
+
   updateCounter();
+  localStorage.setItem(saveDataKey, JSON.stringify(saveData));
   // Update the visual counter of total clicks
 
 
   // Easter egg for my boi will
-  // if (number == 100000) {
+  // if (totalClicks == 100000) {
   //   users.willus.getBitcoinWallet.addBitCoin(0.00005);
   // }
 
@@ -35,21 +50,27 @@ function myFunction() {
 
   
   // console.log(`The human has click the bread ${humanClicks} times`);
-  // if (number == 20) {
+  // if (totalClicks == 20) {
   //   oneCPS();
   // }
 };
 
 
+// TODO: These are broken rn cause total and sliced is different
 function saveButton() {
   console.log("Saving data...");
-  localStorage.setItem("breadClicked", number);
+  // localStorage.setItem("breadClicked", totalClicks);
+
+  console.log("The data to be saved is the following:");
+  console.log(saveData);
+  saveData();
+  
 }
 
 function loadButton() {
   console.log("Loading data...");
-  number = parseInt(localStorage.getItem("breadClicked"));
-  document.getElementById('counter2').innerHTML = number;
+  totalClicks = parseInt(localStorage.getItem("breadClicked"));
+  document.getElementById('counter2').innerHTML = totalClicks;
 
 
 
@@ -71,22 +92,24 @@ function loadButton() {
   //   }
 }
 
-function scheduleDropDownLoad() {
-}
+
+
+
+
 
 
 
 
 function oneCPS() {
-  number += 1;
+  totalClicks += 1;
   document.getElementById('counter').innerHTML = "The counter is at: ";
-  document.getElementById('counter2').innerHTML = number;
+  document.getElementById('counter2').innerHTML = totalClicks;
 
   let t = setTimeout(function(){ oneCPS(); }, 1000);
 }
 
 function makeitnice() {
-    number = 69;
+    totalClicks = 69;
     document.getElementById('counter').innerHTML = "The counter is at: ";
     document.getElementById('counter2').innerHTML = 69;
 };
@@ -94,24 +117,83 @@ function makeitnice() {
 
 function purchaseItem(item) {
   if (item == "getGud") {
-    number = number - 10;
-    localStorage.setItem("breadClicked", number);
-    document.getElementById('counter2').innerHTML = number;
+    // breadSlices = breadSlices - 10;
+    // localStorage.setItem("breadClicked", totalClicks);
+    // updateCounter();
 
   } else if (item == "plasticButterKnife") { // Purchase butter knife
-    if (number >= 100) {
-      number = number - 100;
-      localStorage.setItem("breadClicked", number);
-      document.getElementById('counter2').innerHTML = number;
+    if (breadSlices >= 100) {
+      breadSlices = breadSlices - 100;
+      localStorage.setItem("breadClicked", totalClicks);
 
-      addedSclicesPerClick += 0.25
+      addedSclicesPerClick += 0.25;
+
+      saveData.upgrades[0].quantity = saveData.upgrades[0].quantity + 1;
+      saveData.totalClicks = totalClicks;
+      saveData.breadSlices = breadSlices;
+      console.log(addedSclicesPerClick);
+      console.log(saveData.upgrades[0].quantity / 4);
+
+      // TODO: Make a save function
+      localStorage.setItem(saveDataKey, JSON.stringify(saveData));
+      updateCounter();
     }
   }
 }
 
-function updateCounter() {
-  counterDOM.innerHTML = Math.trunc(number);
+
+
+
+
+function getSaveData() {
+  var storedSave = localStorage[saveDataKey];
+
+  if (storedSave) { // We have a save stored
+    console.log("Loading local save...")
+    this.saveData = JSON.parse(storedSave);
+  } else {
+    // There is no save stored, create one:
+    this.saveData = {
+      totalClicks: totalClicks,
+      breadSlices: breadSlices,
+      upgrades: [
+          {
+              upgrade: "Knife",
+              type: "Plastic Butter knife",
+              quantity: 0
+          },
+          {
+              upgrade: "Knife",
+              type: "Metal Butter knife",
+              quantity: 0
+          },
+          {
+              upgrade: "LmaoGetGudNub",
+              type: "default",
+              quantity: 0
+          }
+      ]
+    }
+  }
+
+  totalClicks = saveData.totalClicks;
+  breadSlices = saveData.breadSlices;
+  addedSclicesPerClick = saveData.upgrades[0].quantity / 4;
+
+  
+
+  updateCounter();
 }
+
+
+function updateCounter() {
+  counterDOM.innerHTML = Math.trunc(breadSlices);
+  knifeCountDOM.innerHTML = saveData.upgrades[0].quantity;
+  knifeAddedSlicesDOM.innerHTML = addedSclicesPerClick;
+}
+
+
+
 
 
 
@@ -123,7 +205,22 @@ img.ondragstart = () => {
 
 
 
-window.onload = loadSchedule();
+
+
+
+
+
+window.onload = pageLoad();
+
+function pageLoad() {
+  loadSchedule();
+
+  getSaveData();
+  console.log(saveData);
+  updateCounter();
+}
+
+
 /**
  * Loads in JSON data.
  * Checks for cache in Local Storage.
@@ -131,8 +228,11 @@ window.onload = loadSchedule();
  * Reference cache with Local Storage.
  */
 function loadSchedule() {
+  
+
+
   $.getJSON("./assets/schedules/schedules.json", function(json) { // Get the latest data
-    var storedData = localStorage["SCHEDULE_DATA"];
+    var storedData = localStorage[scheduleDataKey];
   
     if (storedData) { // We have a cache
       scheduleData = JSON.parse(storedData);
