@@ -250,3 +250,87 @@ hr {
 .buy-button {
   font-weight: bold;
 }
+
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+ -webkit-user-select: none; /* Safari */
+ -khtml-user-select: none; /* Konqueror HTML */
+ -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+img {
+  user-select: none; /* supported by Chrome and Opera */
+ -webkit-user-select: none; /* Safari */
+ -khtml-user-select: none; /* Konqueror HTML */
+ -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.raw-center {
+  text-align: center;
+  margin: auto;
+}
+
+.margin-top {
+  margin-top: 1.5rem;
+}
+
+.cardCollapse {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.icon-flipped {
+  transform: rotateX(180deg);
+}
+.slicer-bot-info {
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+.card-split {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0%;
+  margin-left: 0%;
+  border: 0px;
+  border-top: 2px solid rgba(237,237,237,255);
+}
+
+
+/* Scroll Bar thingssss */
+
+
+/* scroll bar on whole page */
+body::-webkit-scrollbar {
+  width: 0.25em;
+}
+body::-webkit-scrollbar-track {
+  background: #01c6ff;
+  /* box-shadow: inset 0 0 6px #ffffff00; */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(63,63,70,255);
+  /* outline: 1px solid slategrey; */
+  border-radius: 0.rem;
+}
+
+
+
+
+/* Scroll bar in div's */
+div::-webkit-scrollbar {
+  width: 0.25em;
+}
+div::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+div::-webkit-scrollbar-thumb {
+  background-color: rgba(63,63,70,255);
+  /* outline: 1px solid slategrey; */
+}
+
+.hover-darken:hover {
+  background-color: #00000018;
+}
