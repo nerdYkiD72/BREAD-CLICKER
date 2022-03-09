@@ -1,18 +1,8 @@
+// - Variables - :
 const niceButton = document.getElementById("nice_hehe");
 const startDate = new Date();
 const scheduleDataKey = "SCHEDULE_DATA";
 const saveDataKey = "SAVE_DATA";
-const counterDOM = document.getElementById("counter2");
-const knifeCountDOM = document.getElementById("knife-count");
-const knifeAddedSlicesDOM = document.getElementById("knife-added-slices");
-
-const metalKnifeCountDOM = document.getElementById("metal-knife-count");
-const metalKnifeAddedSlicesDOM = document.getElementById("metal-knife-added-slices");
-
-const sliceBotCountDOM = document.getElementById("slice-bot-count");
-const sliceBotSlicePerSecondDom = document.getElementById("slice-bot-slicePerSecond");
-const sliceBotNextClickDOM = document.getElementById("slice-bot-nextClick");
-const chart4_2SlopeDOM = document.getElementById("4-2-slope");
 var myChart;
 let totalClicks = 0;
 var breadSlices = 0;
@@ -49,6 +39,24 @@ const upgradeData = [
   },
 ];
 
+// Document references:
+const counterDOM = document.getElementById("counter2");
+
+const knifeCountDOM = document.getElementById("knife-count");
+const knifeAddedSlicesDOM = document.getElementById("knife-added-slices");
+
+const metalKnifeCountDOM = document.getElementById("metal-knife-count");
+const metalKnifeAddedSlicesDOM = document.getElementById("metal-knife-added-slices");
+
+const sliceBotCountDOM = document.getElementById("slice-bot-count");
+const sliceBotSlicePerSecondDom = document.getElementById("slice-bot-slicePerSecond");
+const sliceBotNextClickDOM = document.getElementById("slice-bot-nextClick");
+
+const superSliceBotCountDOM = document.getElementById("super-slice-bot-count"); 
+const superSliceBotSlicePerSecondDom = document.getElementById("super-slice-bot-slicePerSecond");
+// const superSliceBotNextClickDOM = document.getElementById("");
+
+const chart4_2SlopeDOM = document.getElementById("4-2-slope");
 
 
 
@@ -56,20 +64,23 @@ const upgradeData = [
 
 
 
-function storeSaveData() {
-  saveData.totalClicks = totalClicks;
-  saveData.breadSlices = breadSlices;
 
-  localStorage.setItem(saveDataKey, JSON.stringify(saveData));
-}
+// - Stuffs lol - :
 
 
+
+
+/**
+ * Continuusly updates the cps counter on the page.
+ */
 function doingUrMom() {
   document.getElementById("cps-counter").innerHTML = `${getCPS(false)} Clicks per Second`;
 
   let t = setTimeout(function(){ doingUrMom() }, 75);
 }
-doingUrMom();
+doingUrMom();   // Starts updating
+
+
 
 // Run whenver bread is clicked:
 function myFunction() {
@@ -98,38 +109,7 @@ function myFunction() {
   // }
 }
 
-// TODO: These are broken rn cause total and sliced is different
-function saveButton() {
-  console.log("Saving data...");
-  // localStorage.setItem("breadClicked", totalClicks);
 
-  console.log("The data to be saved is the following:");
-  console.log(saveData);
-  saveData();
-}
-
-function loadButton() {
-  console.log("Loading data...");
-  totalClicks = parseInt(localStorage.getItem("breadClicked"));
-  document.getElementById("counter2").innerHTML = totalClicks;
-
-  // var storedData = localStorage["upgradeData"];
-
-  //   if (storedData) { // We have a cache
-  //     upgradeData = JSON.parse(storedData);
-
-  //     if (JSON.stringify(scheduleData) == JSON.stringify(json)) {
-  //       console.log("Continuing with cache of schedules.");
-  //     } else {
-  //       console.log("Updating cache of schedules.");
-  //       localStorage[scheduleDataKey] = JSON.stringify(json);
-  //     }
-  //   } else {
-
-  //     console.log("No cache of schedules, creating one.");
-  //     localStorage[scheduleDataKey] = JSON.stringify(json);
-  //   }
-}
 
 // Functionalily of dropdowns in Click Shop
 const sliceBotIcon = document.getElementById("slice-bot-arrow");
@@ -143,6 +123,7 @@ function sliceBotButton() {
     sliceBotIcon.classList.add("icon-flipped");
   }
 }
+
 
 const butterKnifeIcon = document.getElementById("butter-knifes-arrow");
 const butterKnifeDiv = document.getElementById("butte-knifes-details");
@@ -160,6 +141,8 @@ function butterKnifesButton() {
 sliceBotButton();
 butterKnifesButton();
 
+
+
 function oneCPS() {
   totalClicks += 1;
   document.getElementById("counter").innerHTML = "The counter is at: ";
@@ -170,17 +153,23 @@ function oneCPS() {
   }, 1000);
 }
 
+
 function makeitnice() {
   totalClicks = 69;
   document.getElementById("counter").innerHTML = "The counter is at: ";
   document.getElementById("counter2").innerHTML = 69;
 }
 
+
+
 function purchaseItem(item) {
   if (item == "getGud") {
     // breadSlices = breadSlices - 10;
     // localStorage.setItem("breadClicked", totalClicks);
     // updateCounter();
+
+
+  // Purchase Plastic Butter Knife:
   } else if (item == "plasticButterKnife") {
     // Purchase BUTTER KNIFE:
     var knifeData = upgradeData[0];
@@ -192,6 +181,8 @@ function purchaseItem(item) {
 
       
     }
+
+  // Purchase Metal Butter Knife:
   } else if (item === "metalButterKnife") {
     var knifeData = upgradeData[1];
     if (breadSlices >= knifeData.price) {
@@ -200,6 +191,8 @@ function purchaseItem(item) {
       addedSclices_MetalKnife += knifeData.slicesAdded;       // Add the knew knifes functionality.
       saveData.upgrades[1].quantity = saveData.upgrades[1].quantity + 1;
     }
+
+  // Purchase Slice Bot:
   } else if (item === "sliceBot") {
     var botData = upgradeData[2];
 
@@ -216,9 +209,27 @@ function purchaseItem(item) {
           quantity: 1,
         });
       }
-      
       sliceBotSlicePerSecondDom.innerHTML = saveData.upgrades[3].quantity / 5;
-      
+    }
+
+  // Purchase Super Slice Bot:
+  } else if (item === "superSliceBot") {
+    var botData = upgradeData[3];
+
+    // Check if user can afford purchase.
+    if (breadSlices >= botData.price) {
+      breadSlices = breadSlices - botData.price;
+
+      try {
+        saveData.upgrades[4].quantity += 1;
+      } catch {
+        saveData.upgrades.push({
+          name: "Super Slice Bot",
+          type: "Super Slice Bot",
+          quantity: 1,
+        });
+      }
+      sliceBotSlicePerSecondDom.innerHTML = saveData.upgrades[4].quantity / 5;
     }
   }
 
@@ -227,15 +238,20 @@ function purchaseItem(item) {
   updateCounter();
 }
 
+
+
 var ii = 0
 var ii2 = 5;
 function sliceBotClicking() {
+  console.log("--------------------------");
   if (ii === 0 || ii % 5 == 0) {
     // console.log(`Multiple of five, ii = ${ii}`);
     breadSlices += saveData.upgrades[3].quantity;
+    console.log(`Added by slice Bot: ${saveData.upgrades[3].quantity}`);
   }
 
-  // breadSlices += saveData.upgrades[4].quantity;
+  breadSlices += saveData.upgrades[4].quantity;
+  console.log(`Added by super Slice Bot: ${saveData.upgrades[4].quantity}`);
   if (ii2 <= 0) {
     ii2 = 5;
   }
@@ -245,8 +261,11 @@ function sliceBotClicking() {
   updateCounter();
   ii2--;
   ii++;
+
+  
   let t = setTimeout(function(){ sliceBotClicking() }, 1000);
 }
+
 
 
 function getSaveData() {
@@ -296,27 +315,36 @@ function getSaveData() {
   breadSlices = saveData.breadSlices;
   addedSclicesPerClick = saveData.upgrades[0].quantity / 4;
   addedSclices_MetalKnife = saveData.upgrades[1].quantity / 2;
+
   if (saveData.historicData == undefined) {
     saveData.historicData = [0, 0, 0, 0, 0, 0];
   }
 
-  
-
-
   updateCounter();
 }
 
-// TODO: add a special upgrade that makes knife effects work on slice bots
+
+
+function storeSaveData() {
+  saveData.totalClicks = totalClicks;
+  saveData.breadSlices = breadSlices;
+  localStorage.setItem(saveDataKey, JSON.stringify(saveData));
+}
+
+// TODO: Add a special upgrade that makes knife effects work on slice bots.
 
 function updateCounter() {
-  counterDOM.innerHTML = Math.trunc(breadSlices);
-  knifeCountDOM.innerHTML = saveData.upgrades[0].quantity;
-  knifeAddedSlicesDOM.innerHTML = addedSclicesPerClick;
-  metalKnifeCountDOM.innerHTML = saveData.upgrades[1].quantity;
-  metalKnifeAddedSlicesDOM.innerHTML = addedSclices_MetalKnife;
+  counterDOM.innerHTML = Math.trunc(breadSlices).toLocaleString();
+  knifeCountDOM.innerHTML = saveData.upgrades[0].quantity.toLocaleString();
+  knifeAddedSlicesDOM.innerHTML = addedSclicesPerClick.toLocaleString();
+  metalKnifeCountDOM.innerHTML = saveData.upgrades[1].quantity.toLocaleString();
+  metalKnifeAddedSlicesDOM.innerHTML = addedSclices_MetalKnife.toLocaleString();
 
-  sliceBotCountDOM.innerHTML = saveData.upgrades[3].quantity;
-  sliceBotSlicePerSecondDom.innerHTML = saveData.upgrades[3].quantity / 5;
+  sliceBotCountDOM.innerHTML = saveData.upgrades[3].quantity.toLocaleString();
+  sliceBotSlicePerSecondDom.innerHTML = (saveData.upgrades[3].quantity / 5).toLocaleString();
+
+  superSliceBotCountDOM.innerHTML = saveData.upgrades[4].quantity.toLocaleString();
+  superSliceBotSlicePerSecondDom.innerHTML = saveData.upgrades[4].quantity.toLocaleString();
   
   
   
@@ -335,7 +363,7 @@ function updateGraph() {
     var rise = historicData[4] - historicData[3];
     // run is equal to 2
 
-    chart4_2SlopeDOM.innerHTML = rise/2;
+    chart4_2SlopeDOM.innerHTML = (rise / 2).toLocaleString();
 
     try {
       myChart.update();
@@ -359,12 +387,31 @@ img.ondragstart = () => {
   return false;
 };
 
+
+
+
 window.onload = pageLoad();
 
 function pageLoad() {
   loadSchedule();
 
+  // Game stufs:
   getSaveData();
+  chartConfig();
+  updateGraph();
+  updateCounter();
+  sliceBotClicking(); 
+}
+
+
+
+
+
+
+/**
+ * Creates and configures the chart
+ */
+function chartConfig() {
   // Chart.js Configuration:
   const labels = [
     '10',
@@ -398,14 +445,16 @@ function pageLoad() {
     document.getElementById('myChart'),
     config
   );
-
-  updateGraph();
-  updateCounter();
-  sliceBotClicking();
-
-
-  
 }
+
+
+
+
+function formatNum() {
+
+}
+
+
 
 /**
  * Loads in JSON data.
@@ -438,11 +487,13 @@ function loadSchedule() {
   serveData();
 }
 
+
+
 /**
  * Displays the data from cached JSON in the schedule table.
  * Only logic here for now is determining what schedule to show for either Wed. or other weekdays.
+ * TODO: Make it so you can remember what the last schedule was.
  */
-// TODO: Make it so you can remember what the last schedule was.
 function serveData() {
   var dateNow = new Date();
   var json = JSON.parse(localStorage[scheduleDataKey]);
@@ -471,6 +522,10 @@ function serveData() {
   updateClock();
 }
 
+
+/**
+ * Handles when the user changes the selected schedule in the drop down.
+ */
 function scheduleSelectChange() {
   // Add more scheduels
   var json = JSON.parse(localStorage[scheduleDataKey]);
@@ -490,6 +545,10 @@ function scheduleSelectChange() {
   }
 }
 
+
+/**
+ * Removes the contents from the table
+ */
 function clearTable() {
   var scheduleTable = document.getElementById("schedule-chart");
   var toRemove = [];
