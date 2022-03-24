@@ -24,7 +24,8 @@
   <div class="body-main">
     <div class="columns">
       <div class="column">
-
+        <h1 class="title" id="testCounter"></h1>
+        <h1 class="title" id="testTimer"></h1>
       </div>
       <div class="column">
         <h3 class="title" id="Title">Got bread?</h3>
@@ -42,7 +43,7 @@
           <!-- <button type="button" onclick="saveButton()" class="button is-success" id="save-button">Save Data</button> -->
           <div>
             <canvas id="myChart"></canvas>
-            <div>
+            <div> 
               <p class="sub-title">Slices per Second across 4 - 2: <mark class="marker" id="4-2-slope">35</mark> SPS</p>
             </div>
           </div>
@@ -275,15 +276,15 @@
         <div class="schedule-change-dropdown">
           <select id="schedule-select" class="form-select" aria-label="Default select example"
             onchange="scheduleSelectChange()"></section>>
-            <option selected>Not the schedule today? Change it manually here.</option>
+            <option selected>Default</option>
           </select>
           <div class="control">
             <label class="radio">
-              <input type="radio" name="A/B-Lunch" id="A-select">
-              B Lunch
+              <input type="radio" name="A/B-Lunch" id="A-select" onclick="scheduleSelectChange()">
+              A Lunch
             </label>
             <label class="radio">
-              <input type="radio" name="A/B-Lunch" id="B-select">
+              <input type="radio" name="A/B-Lunch" id="B-select" onclick="scheduleSelectChange()">
               B Lunch
             </label>
           </div>

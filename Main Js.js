@@ -1,3 +1,5 @@
+// const { parseJSON } = require("jquery");
+
 // - Variables - :
 const niceButton = document.getElementById("nice_hehe");
 const startDate = new Date();
@@ -6,6 +8,9 @@ const saveDataKey = "SAVE_DATA";
 var myChart;
 let totalClicks = 0;
 var breadSlices = 0;
+var breadSlicesOld = 0;
+var breadSlicesDisplay = 0;
+var breadPerSecond = 0;
 var cps = 0;
 var addedSclicesPerClick = 0;
 var addedSclices_MetalKnife = 0;
@@ -61,13 +66,15 @@ const chart4_2SlopeDOM = document.getElementById("4-2-slope");
 
 
 
-
+// Hi ruths
 
 
 
 // - Stuffs lol - :
 
-
+// setInterval(() => {
+//   console.log(`${breadSlices} | ${totalClicks}`);
+// }, 100);
 
 
 /**
@@ -78,6 +85,7 @@ function doingUrMom() {
 
   let t = setTimeout(function(){ doingUrMom() }, 75);
 }
+// Ruths look at this funny function name:
 doingUrMom();   // Starts updating
 
 
@@ -85,7 +93,11 @@ doingUrMom();   // Starts updating
 // Run whenver bread is clicked:
 function myFunction() {
   totalClicks = totalClicks + 1; // Keep track of total clicks
-  breadSlices = breadSlices + 1 + addedSclicesPerClick + addedSclices_MetalKnife; // Keep track of actual bread sliced
+  // breadSlices = breadSlices + 1 + addedSclicesPerClick + addedSclices_MetalKnife; // Keep track of actual bread sliced
+
+  addedBreadSlices = 1 + addedSclicesPerClick + addedSclices_MetalKnife;
+  // smoothAddition(addedSclicesPerClick, 250, 10);
+  breadSlices += addedBreadSlices;
 
   // Update cps when bread is clicked. This will actaully be what counts the clicks.
   document.getElementById("cps-counter").innerHTML = `${getCPS(true)} Clicks per Second`;
@@ -206,6 +218,7 @@ function purchaseItem(item) {
         saveData.upgrades.push({
           name: "Slice Bot",
           type: "Slice Bot",
+          // lmao ruths you dumb fuck why are you looking at this???????????????? idiot
           quantity: 1,
         });
       }
@@ -243,18 +256,33 @@ function purchaseItem(item) {
 var ii = 0
 var ii2 = 5;
 function sliceBotClicking() {
-  console.log("--------------------------");
-  if (ii === 0 || ii % 5 == 0) {
-    // console.log(`Multiple of five, ii = ${ii}`);
-    breadSlices += saveData.upgrades[3].quantity;
-    console.log(`Added by slice Bot: ${saveData.upgrades[3].quantity}`);
-  }
+  breadSlicesOld = breadSlices;
+  var added = (saveData.upgrades[3].quantity / 5) + saveData.upgrades[4].quantity;
+  breadSlices = breadSlices + added;
 
-  breadSlices += saveData.upgrades[4].quantity;
-  console.log(`Added by super Slice Bot: ${saveData.upgrades[4].quantity}`);
+  animateValue(counterDOM, breadSlicesOld, breadSlices, 1000);
+  // if (ii === 0 || ii % 5 == 0) {
+  //   // console.log(`Multiple of five, ii = ${ii}`);
+  //   smoothAddition(saveData.upgrades[3].quantity, 250, 10);
+  // }
+
+  
+
+  // breadSlices += saveData.upgrades[4].quantity;
+  // smoothAddition(saveData.upgrades[4].quantity, 250, 10);
+  // const testCounter = document.getElementById("testCounter");
+  // breadPerSecond = (saveData.upgrades[3].quantity / 5) + saveData.upgrades[4].quantity;
+  // animateValue(testCounter, breadSlices, breadSlices + breadPerSecond, 10000);
+
+
+  
+
+
   if (ii2 <= 0) {
     ii2 = 5;
   }
+
+
 
   sliceBotNextClickDOM.innerHTML = ii2;
 
@@ -263,9 +291,83 @@ function sliceBotClicking() {
   ii++;
 
   
+
+
+  
+
+
+
   let t = setTimeout(function(){ sliceBotClicking() }, 1000);
 }
 
+
+
+
+
+async function continuousSSBot() {
+  // var added = 1000// saveData.upgrades[4].quantity;
+  // var pause = added / 1000;
+  // console.log(pause);
+  // var test = 0;
+
+  // console.log("Start");
+  // for (let i = 0; i < added; i++) {
+  //   test += 1;
+  //   console.log(test);
+  //   await sleep(5);
+  //   console.log("done sleep")
+  // }
+
+  
+
+  setTimeout(() => {
+    document.getElementById("testTimer").innerHTML = 1;
+  }, 1000);
+}
+
+
+// TODO: implement this. Stolen from: https://css-tricks.com/animating-number-counters/
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = showBread(Math.floor(progress * (end - start) + start));
+    // console.log(Math.floor(progress * (end - start) + start));
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+
+function showBread(bread) {
+  if (bread >= 1.0e+6 && bread < 1.0e+9) {
+    bread = bread.toLocaleString();
+    // var blocks = [];
+    // var rounded = "";
+    // for (let i = 0; i < bread.length; i++) {
+    //   const element = bread[i];
+    //   if (element === ",") {
+    //     blocks.push(rounded);
+    //     rounded = "";
+    //   } else {
+    //     rounded = rounded + element;
+    //   }
+    // }
+    // console.log(blocks);
+
+    var blocks = bread.split(",");
+    // console.log(blocks);
+
+    return blocks[0] + "." + blocks[1] + ' <mark class="counter-label">million</mark>';
+    // return blocks[0] + "." + blocks[1] + ' million';
+  } else {
+    return bread;
+  }
+
+}
 
 
 function getSaveData() {
@@ -332,6 +434,42 @@ function storeSaveData() {
 }
 
 // TODO: Add a special upgrade that makes knife effects work on slice bots.
+
+/**
+ * Blissful sleep
+ * @param {Number} ms How long to pause
+ * @returns Promise to block the thread
+ */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+/**
+ * Increments a counter in steps. 
+ * @param {Number} addedAmount The value your actually adding.
+ * @param {Number} time Total time (ms) you want the adding to take.
+ * @param {Number} steps How many times the number will get added
+ */
+async function smoothAddition(addedAmount, time, steps) {
+  var definiteAnswer = breadSlices + addedAmount;
+  var timeBetweenAdds = time / steps;
+
+  for (let i = 0; i < steps; i++) {
+      await sleep(timeBetweenAdds);
+      // Ruths what are you doing; go to sleep its past your bedtime.
+      breadSlices += (addedAmount / steps);
+      counterDOM.innerHTML = Math.trunc(breadSlices).toLocaleString();
+  }
+
+  if (breadSlices !== definiteAnswer) {
+    breadSlices = definiteAnswer;
+  }
+
+  counterDOM.innerHTML = Math.trunc(breadSlices).toLocaleString();
+
+}
+
 
 function updateCounter() {
   counterDOM.innerHTML = Math.trunc(breadSlices).toLocaleString();
@@ -401,11 +539,10 @@ function pageLoad() {
   updateGraph();
   updateCounter();
   sliceBotClicking(); 
+  continuousSSBot();
+
+  document.getElementById("A-select").checked = true;
 }
-
-
-
-
 
 
 /**
@@ -484,7 +621,7 @@ function loadSchedule() {
   }); // TODO: add the ability to add custome schedules (Things like snow day and 60 min ADV.)
 
   // Once we know the cache is right, serve its contents to the user.
-  serveData();
+  serveData();3
 }
 
 
@@ -500,9 +637,9 @@ function serveData() {
 
   // 3 = Wednesday, 1-5 = Weekdays, 6 & 0 = Saturday & Sunday
   if (dateNow.getDay() == 3) {
-    fillTable(json[1].classes);
+    fillTable(json[1]);
   } else {
-    fillTable(json[0].classes);
+    fillTable(json[0]);
   }
 
   var scheduleSelect = document.getElementById("schedule-select");
@@ -531,17 +668,29 @@ function scheduleSelectChange() {
   var json = JSON.parse(localStorage[scheduleDataKey]);
   var dropDown = document.getElementById("schedule-select");
   var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+  var aLunch = document.getElementById("A-select").checked
+  var bLunch = document.getElementById("B-select").checked
+  var dateNow = new Date();
+  console.log(aLunch);
 
-  console.log(selectedSchedule);
-  if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
-    clearTable();
-    fillTable(json[2].classes);
-  } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
-    clearTable();
-    fillTable(json[3].classes);
-  } else if (selectedSchedule == "Wed - 1hr long Advisory") {
-    clearTable();
-    fillTable(json[4].classes);
+
+ clearTable();
+  // console.log(selectedSchedule);
+  if (selectedSchedule == "2hr Delay") {
+    aLunch ? fillTable(json[2], "a") : fillTable(json[2], "b");
+
+  }
+  else if (selectedSchedule == "1hr long Advisory") {
+    fillTable(json[3]);
+
+  }
+  else if (selectedSchedule == "Default") {
+    if (dateNow.getDay() == 3) {  // Its Wednesday:
+      aLunch ? fillTable(json[1], "a") : fillTable(json[1], "b");
+
+    } else {
+      aLunch ? fillTable(json[0], "a") : fillTable(json[0], "b");
+    }
   }
 }
 
@@ -552,7 +701,6 @@ function scheduleSelectChange() {
 function clearTable() {
   var scheduleTable = document.getElementById("schedule-chart");
   var toRemove = [];
-  console.log(scheduleTable.rows.length);
   for (let i = 1; i < scheduleTable.rows.length; i++) {
     const element = scheduleTable.rows[i];
 
@@ -569,17 +717,39 @@ function clearTable() {
  * Goes through all data given by json data and puts it in a table.
  * @param daysSchedule The json data of the current days schedule.
  */
-function fillTable(daysSchedule) {
+function fillTable(daysSchedule, lunch="a") {
   var i = 0;
   var schdeuldTable = document.getElementById("schedule-chart");
+  console.log(`${lunch}-lunch selected`);
 
-  daysSchedule.forEach((element) => {
+  daysSchedule.classes.forEach((element) => {
     i++;
 
     // Create new cells.
     var newRow = schdeuldTable.insertRow(i);
     var cell_Left = newRow.insertCell(0);
     var cell_Right = newRow.insertCell(1);
+    
+    if (daysSchedule.name == "2hr Delay") {
+      if (lunch == "a") {
+        if (i == 2) { // Change 3rd period to lunch if A schedule
+          element = daysSchedule.altClasses[0];
+        }
+        else if (i == 3) { // Change lunch to 3rd peridod if A schedule
+          element = daysSchedule.altClasses[1];
+        }
+      }
+    } else {
+      if (lunch == "a") {
+        if (i == 3) { // Change 3rd period to lunch if A schedule
+          element = daysSchedule.altClasses[0];
+        }
+        else if (i == 4) { // Change lunch to 3rd peridod if A schedule
+          element = daysSchedule.altClasses[1];
+        }
+      }
+    }
+    
 
     newRow.setAttribute("id", "prd" + element.name + "row");
 
@@ -592,7 +762,25 @@ function fillTable(daysSchedule) {
     // Fill cells with contents.
     cell_Left.innerHTML = element.name;
     cell_Right.innerHTML = element.start + " - " + element.end;
+    
+
+    
   });
 
   // Start updateing the clock once the table has loaded.
+}
+function ABlunchSelect(Jimmy) {
+
+
+  if (Jimmy == "A-select"){
+    console.log("A Lunch is Selected")
+
+
+  } 
+  else if (Jimmy == "B-select"){
+    console.log("B Lunch is Selected")
+
+
+  }
+
 }

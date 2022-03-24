@@ -37,7 +37,7 @@
         "altClasses": [
             {
                 "name": "Lunch",
-                "star": "10:24 AM",
+                "start": "10:24 AM",
                 "end": "10:54 AM"
             }, 
             {
@@ -85,10 +85,22 @@
                 "start": "1:41 PM",
                 "end": "2:30 PM"
             }
+        ],
+        "altClasses": [
+            {
+                "name": "Lunch",
+                "start": "10:43 AM",
+                "end": "11:13 AM"
+            }, 
+            {
+                "name": "3",
+                "start": "11:18 AM",
+                "end": "12:07 AM"
+            }
         ]
     },
     {
-        "name": "Weekday 2hr Delay - B Lunch",
+        "name": "2hr Delay",
         "classes": [
             {
                 "name": "1",
@@ -137,43 +149,7 @@
         ]
     },
     {
-        "name": "Weekday 2hr Delay - A Lunch",
-        "classes": [
-            {
-                "name": "1",
-                "start": "10:00 AM",
-                "end": "10:44 AM"
-            },
-            {
-                "name": "Lunch",
-                "start": "10:44 AM",
-                "end": "11:14 AM"
-            },
-            {
-                "name": "2",
-                "start": "11:19 AM",
-                "end": "12:03 AM"
-                
-            },
-            {
-                "name": "3",
-                "start": "12:08 AM",
-                "end": "12:52 AM"
-            },
-            {
-                "name": "4",
-                "start": "12:57 AM",
-                "end": "1:41 PM"
-            },
-            {
-                "name": "5",
-                "start": "1:46 PM",
-                "end": "2:30 PM"
-            }
-        ]
-    },
-    {
-        "name": "Wed - 1hr long Advisory",
+        "name": "1hr long Advisory",
         "classes": [
             {
                 "name": "1",
@@ -209,6 +185,18 @@
                 "name": "5",
                 "start": "1:47 PM",
                 "end": "2:30 PM"
+            }
+        ],
+        "altClasses": [
+            {
+                "name": "Lunch",
+                "start": "Lmao",
+                "end": "I don't"
+            }, 
+            {
+                "name": "3",
+                "start": "Even",
+                "end": "Know"
             }
         ]
     }
