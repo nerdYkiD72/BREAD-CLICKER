@@ -25,29 +25,40 @@ function updateClock() { // Display the current time. Once called function will 
   let t = setTimeout(function(){ updateClock() }, 1000);
 }
 
+
+
+// TODO: I could make some more chaches to eleimnate needing to do a lot of this logic every second.
 function getCurrentPeriod() { // Checks what period the user is in based on the time and day. 
   var json = JSON.parse(localStorage[scheduleDataKey]);
   const dropDown = document.getElementById("schedule-select");
   var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
+  var aLunch = document.getElementById("A-select").checked;
 
+
+  // MANUALLY ACHANGE TIME FOR DEBUGGING:
   var dateNow = new Date(); 
   // dateNow.setHours(12);
-  // dateNow.setMinutes(38);
+  // dateNow.setMinutes(45);
+
+
   
-  if (selectedSchedule == "Weekday 2hr Delay - B Lunch") {
-    clockCycleThings(json, 2, dateNow);
+  if (selectedSchedule == "2hr Delay") {
+    aLunch ? clockCycleThings(json, 2, dateNow, "a") : clockCycleThings(json, 2, dateNow, "b")
 
-  } else if (selectedSchedule == "Weekday 2hr Delay - A Lunch") {
-    clockCycleThings(json, 3, dateNow);
-
-  } else if (selectedSchedule == "Wed - 1hr long Advisory") {
+  } 
+  else if (selectedSchedule == "1hr long Advisory") {
     clockCycleThings(json, 4, dateNow);
 
-  } else {                                  // TODO: check this for wednesday
+  } 
+  else if (selectedSchedule == "1hr long Advisory") {
+    aLunch ? clockCycleThings(json, 3, dateNow, "a") : clockCycleThings(json, 3, dateNow, "b")
+
+  }
+  else {                                  // TODO: check this for wednesday
     if (dateNow.getDay() != 3) {
-      clockCycleThings(json, 0, dateNow);
+      aLunch ? clockCycleThings(json, 0, dateNow, "a") : clockCycleThings(json, 0, dateNow, "b")
     } else {
-      clockCycleThings(json, 1, dateNow);
+      aLunch ? clockCycleThings(json, 1, dateNow, "a") : clockCycleThings(json, 1, dateNow, "b")
 
       
     }
@@ -55,14 +66,36 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
 }
 
 
-function clockCycleThings(json, dayNumber, dateNow) {
+function clockCycleThings(json, dayNumber, dateNow, lunch="a") {
 // TODO: Fix this L
   
-  var daysSchedule = json[dayNumber].classes;
+  var daysSchedule = json[dayNumber];
   var i = 0;
 
-  daysSchedule.forEach(element => {
+  daysSchedule.classes.forEach(element => {
     i++;
+
+    if (daysSchedule.name == "2hr Delay") {
+      if (lunch == "a") {
+        if (i == 2) { // Change 3rd period to lunch if A schedule
+          element = daysSchedule.altClasses[0];
+        }
+        else if (i == 3) { // Change lunch to 3rd peridod if A schedule
+          element = daysSchedule.altClasses[1];
+        }
+      }
+    } else {
+      if (lunch == "a") {
+        if (i == 3) { // Change 3rd period to lunch if A schedule
+          element = daysSchedule.altClasses[0];
+        }
+        else if (i == 4) { // Change lunch to 3rd peridod if A schedule
+          element = daysSchedule.altClasses[1];
+        }
+      }
+    }
+    
+
     var startTime = dateObj(element.start);
     var endTime = dateObj(element.end);
     var open = dateNow < endTime && dateNow > startTime ? true : false; // compare
