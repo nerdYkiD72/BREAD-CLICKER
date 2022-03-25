@@ -76,17 +76,28 @@ const chart4_2SlopeDOM = document.getElementById("4-2-slope");
 //   console.log(`${breadSlices} | ${totalClicks}`);
 // }, 100);
 
+//
+// Holding enter key = ~31 cps roughly
+//
+
 
 /**
  * Continuusly updates the cps counter on the page.
  */
 function doingUrMom() {
   document.getElementById("cps-counter").innerHTML = `${getCPS(false)} Clicks per Second`;
+  document.getElementById("testCPS").innerHTML = `${getCPS(false)} Clicks per Second`;
 
   let t = setTimeout(function(){ doingUrMom() }, 75);
 }
 // Ruths look at this funny function name:
 doingUrMom();   // Starts updating
+
+
+
+function testHoldCPS() {
+  document.getElementById("testCPS").innerHTML = `${getCPS(true)} Clicks per Second`;
+}
 
 
 
@@ -105,6 +116,7 @@ function myFunction() {
   saveData.totalClicks = totalClicks;
   saveData.breadSlices = breadSlices;
 
+  console.log("Hi")
   updateCounter();
   localStorage.setItem(saveDataKey, JSON.stringify(saveData));
   storeSaveData();
@@ -343,28 +355,17 @@ function animateValue(obj, start, end, duration) {
 
 
 function showBread(bread) {
-  if (bread >= 1.0e+6 && bread < 1.0e+9) {
-    bread = bread.toLocaleString();
-    // var blocks = [];
-    // var rounded = "";
-    // for (let i = 0; i < bread.length; i++) {
-    //   const element = bread[i];
-    //   if (element === ",") {
-    //     blocks.push(rounded);
-    //     rounded = "";
-    //   } else {
-    //     rounded = rounded + element;
-    //   }
-    // }
-    // console.log(blocks);
-
-    var blocks = bread.split(",");
-    // console.log(blocks);
-
-    return blocks[0] + "." + blocks[1] + ' <mark class="counter-label">million</mark>';
-    // return blocks[0] + "." + blocks[1] + ' million';
-  } else {
-    return bread;
+  if (bread >= 1.0e+6 && bread < 1.0e+9) {  // Million
+    return (bread / 1.0e+6).toFixed(3) + ' <mark class="counter-label">million</mark>';
+  } 
+  else if (bread >= 1.0e+9 && bread < 1.0e+12) {  // Billion
+    return (bread / 1.0e+9).toFixed(3) + ' <mark class="counter-label">million</mark>';
+  }
+  else if (bread >= 1.0e+12 && bread < 1.0e+15) {  // Trillion
+    return (bread / 1.0e+12).toFixed(3) + ' <mark class="counter-label">million</mark>';
+  }
+  else {
+    return bread.toLocaleString();
   }
 
 }
@@ -471,7 +472,12 @@ async function smoothAddition(addedAmount, time, steps) {
 }
 
 
+
+
+
+
 function updateCounter() {
+  console.log("Heloooo");
   counterDOM.innerHTML = Math.trunc(breadSlices).toLocaleString();
   knifeCountDOM.innerHTML = saveData.upgrades[0].quantity.toLocaleString();
   knifeAddedSlicesDOM.innerHTML = addedSclicesPerClick.toLocaleString();
