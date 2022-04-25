@@ -20,7 +20,7 @@ function updateClock() { // Display the current time. Once called function will 
   let time = hh + ":" + mm + ":" + ss;
 
   document.getElementById("clock").innerText = time; 
-  getCurrentPeriod();
+  getCurrentPeriod(date);
 
   let t = setTimeout(function(){ updateClock() }, 1000);
 }
@@ -28,17 +28,16 @@ function updateClock() { // Display the current time. Once called function will 
 
 
 // TODO: I could make some more chaches to eleimnate needing to do a lot of this logic every second.
-function getCurrentPeriod() { // Checks what period the user is in based on the time and day. 
+function getCurrentPeriod(dateNow) { // Checks what period the user is in based on the time and day. 
   var json = JSON.parse(localStorage[scheduleDataKey]);
   const dropDown = document.getElementById("schedule-select");
   var selectedSchedule = dropDown.options[dropDown.selectedIndex].value;
   var aLunch = document.getElementById("A-select").checked;
 
 
-  // MANUALLY ACHANGE TIME FOR DEBUGGING:
-  var dateNow = new Date(); 
-  // dateNow.setHours(12);
-  // dateNow.setMinutes(45);
+  // MANUALLY CHANGE TIME FOR DEBUGGING:
+  dateNow.setHours(12);
+  dateNow.setMinutes(30);
 
 
   
@@ -56,10 +55,14 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
   }
   else {                                  // TODO: check this for wednesday
     if (dateNow.getDay() != 3) {
-      aLunch ? clockCycleThings(json, 0, dateNow, "a") : clockCycleThings(json, 0, dateNow, "b")
+      // aLunch ? clockCycleThings(json, 0, dateNow, "a") : clockCycleThings(json, 0, dateNow, "b");
+      console.log("Its not wednesday today.");
+      console.log(json[1]);
+      // TODO: pretend its wednesday lol
+      aLunch ? clockCycleThings(json, 1, dateNow, "a") : clockCycleThings(json, 1, dateNow, "b")
     } else {
       aLunch ? clockCycleThings(json, 1, dateNow, "a") : clockCycleThings(json, 1, dateNow, "b")
-
+      console.log("Its wednesday.")
       
     }
   }
@@ -69,6 +72,8 @@ function getCurrentPeriod() { // Checks what period the user is in based on the 
 function clockCycleThings(json, dayNumber, dateNow, lunch="a") {
 // TODO: Fix this L
   
+console.log("Date now = " + dateNow);
+
   var daysSchedule = json[dayNumber];
   var i = 0;
 

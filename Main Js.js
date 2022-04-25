@@ -645,7 +645,10 @@ function serveData() {
   if (dateNow.getDay() == 3) {
     fillTable(json[1]);
   } else {
-    fillTable(json[0]);
+    // fillTable(json[0]);
+
+    // TODO: change this back pls
+    fillTable(json[1]);
   }
 
   var scheduleSelect = document.getElementById("schedule-select");
