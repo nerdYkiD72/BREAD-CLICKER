@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta x-content-type-options="nosniff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OHHS Schedule</title>
+  <link rel="shortcut icon" type="image/jpg" href="../assets/Bread.png"/>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="schedule.css">
+</head>
+
+<body>
+  <nav class="navbar is-fixed-top is-dark bruh" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item move-right my-navbar-item" href="../index.html">
+        <img src="../assets/Bread.png">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item my-navbar-item" href="../index.html">
+          Home
+        </a>
+
+        <a class="navbar-item my-navbar-item" href="schedule.html">
+          Schedule
+        </a>
+
+        <a class="navbar-item my-navbar-item" target="_blank" href="https://github.com/nerdYkiD72/BREAD-CLICKER">
+          Github
+        </a>
+      </div>
+      <div class="navbar-end">
+      </div>
+  </nav>
+
+  <!-- Begin page content -->>
+
+  <div class="bodyClass">
+
+    <!-- Schedule stuffs lol -->
+
+    <h2 class="title">School Schedule</h2>
+    <div class="center shadow-lg">
+      <div class="columns is-centered">
+        <div id="chart">
+          <!--  table-striped -->
+          <table class="table" id="schedule-chart">
+            <thead>
+              <tr>
+                <th scope="col">Period</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hi</td>
+                <td>There</td>
+              </tr>
+              <tr>
+                <td>What's</td>
+                <td>Up</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- <div>
+            <h3>No school!</h3>
+        </div> -->
+      <div class="sub-container-2">
+
+        <div id="clock-container">
+          <label id="clock" onload="updateClock()">00:00>
+        </div>
+        <div class="time-left-container">
+          <h3 id="time-left">There is only 0 minutes left.</h3>
+
+          <div class="schedule-change-dropdown">
+            <select id="schedule-select" class="form-select" aria-label="Default select example"
+              onchange="scheduleSelectChange()"></section>>
+              <option selected>Default</option>
+            </select>
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="A/B-Lunch" id="A-select" onclick="scheduleSelectChange()">
+                A Lunch
+              </label>
+              <label class="radio">
+                <input type="radio" name="A/B-Lunch" id="B-select" onclick="scheduleSelectChange()">
+                B Lunch
+              </label>
+            </div>
+          </div>
+          <p>
+            You have <mark class="yellow-marker">A Lunch</mark> if your second period is: <mark
+              class="lunch-classes">Art,
+              Band, Choir, CTE, Math, or Sciences</mark>
+          </p>
+          <p>
+            You have <mark class="yellow-marker">B Lunch</mark> if your second period is: <mark
+              class="lunch-classes">ELA,
+              Health/PE, ROTC, Speacial Programs, Social Studies, World Languages</mark>
+          </p>
+          <a href="https://www.ohsd.net/Page/5936" target="_blank">Official School Schedules</a>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="columns is-centered">
+      <div id="chart">
+        <!--  table-striped -->
+        <table class="table is-dark">
+          <thead>
+            <tr>
+              <th scope="col">Period</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hi</td>
+              <td>There</td>
+            </tr>
+            <tr>
+              <td>What's</td>
+              <td>Up</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+<!-- End page content -->>
+
+    <div class="dumby">.</div>
+    <div>
+      <button class="button is-success buy-button" onclick="testHoldCPS()">Testtt</button>
+      <h2>CPS: <mark class="marker" id="testCPS"></mark></h2>
+    </div>
+  </div>
+
+
+
+
+  <script src="schedule.js"></script>
+</body>
+
+</html>
